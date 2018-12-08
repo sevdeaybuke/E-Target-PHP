@@ -98,7 +98,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Benim Zaman Tünelim</a></div></li>
               <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">İnsanların Zaman Tüneli</a></div></li>
               <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.php">Üyeler</a></div></li>
-              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Mesajlar</a></div></li>
+              <li><i class="icon ion-chatboxes"></i><div><a href="mesaj-gonder.php">Mesajlar</a></div></li>
               <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Resimler</a></div></li>
               <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videolar</a></div></li>
               <li><i class="icon ion-ios-football"></i><div><a href="dino.php">Eğlence</a></div></li>
@@ -161,7 +161,8 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     <div class="card-info">
                     <img src="<?php echo $kullaniclariCek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-lg"/>
                     <div class="friend-info">
-                    <a href="#" class="pull-right text-green">Mesaj Gönder</a>
+                    <a href="#" class="pull-right text-green">| Profilini Görüntüle</a>
+                    <a href="newsfeed-messages.php" class="pull-right text-green"> | Mesaj Gönder</a>
                     <?php echo $kullaniclariCek['kullanici_ad']." ".$kullaniclariCek['kullanici_soyad'] ?>
                       </div>
                       </div>

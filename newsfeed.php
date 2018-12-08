@@ -154,7 +154,9 @@ if (isset($_SESSION['userkullanici_mail'])) {
             ================================================= -->
             <div class="post-content">
             <?php 
-                    $durumsor=$db->prepare("SELECT * FROM durum where kullanici_id=:kullanici_id order by zaman DESC");
+                $durumsor=$db->prepare("SELECT * FROM durum INNER JOIN kullanici on kullanici.kullanici_id=durum.kullanici_id
+                where durum.kullanici_id=:kullanici_id
+                 order by zaman DESC");
                     $durumsor->execute(array(
                         'kullanici_id' => $_SESSION['userkullanici_id']
                     ));
@@ -169,8 +171,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     </div>
                     <div class="line-divider"></div>
                     <div class="post-text"><!-- Durum tablosudan çekilen veriler buraya gelecek -->
-                    <p>
-                    <?php echo $durumlarıcek['durum'] ?>
+                    <p><?php echo $durumlarıcek['durum'] ?></p>
                     <a href="newsfeed?durum_id=<?php echo $durumlarıcek['durum_id'] ?>"><button class="btn btn-primary btn-xs" style="float:right;">Düzenle</button></a>
                     </p>
                     </div>
