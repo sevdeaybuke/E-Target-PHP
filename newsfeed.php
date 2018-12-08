@@ -98,12 +98,12 @@ if (isset($_SESSION['userkullanici_mail'])) {
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
-              <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
-              <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">People Nearby</a></div></li>
-              <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Friends</a></div></li>
-              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Messages</a></div></li>
-              <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Images</a></div></li>
-              <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
+              <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Benim Zaman Tünelim</a></div></li>
+              <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">İnsanların Zaman Tüneli</a></div></li>
+              <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Arkadaşlar</a></div></li>
+              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Mesajlar</a></div></li>
+              <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Resimler</a></div></li>
+              <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videolar</a></div></li>
               <li><i class="icon ion-ios-football"></i><div><a href="dino.php">Eğlence</a></div></li>
             </ul><!--news-feed links ends-->
             <div id="chat-block">
