@@ -1,4 +1,19 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!--Google Webfont-->
+		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
+	</head>
+  <?php
 ob_start();
 session_start();
 date_default_timezone_set('Europe/Istanbul');
@@ -30,26 +45,8 @@ if (isset($_SESSION['userkullanici_mail'])) {
 
 ?>
   
-
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Stylesheets
-    ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/ionicons.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link href="css/emoji.css" rel="stylesheet">
-    <!--Google Webfont-->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-    <!--Favicon-->
-	</head>
   <body>
+
     <!-- Header
     ================================================= -->
 		<header id="header">
@@ -122,7 +119,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             </div><!--chat block ends-->
           </div>
     			<div class="col-md-7">
-
+  
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
@@ -150,57 +147,35 @@ if (isset($_SESSION['userkullanici_mail'])) {
             </div><!-- Post Create Box End-->
   
 
-            <!-- Post Content
+            <!-- Friend List
             ================================================= -->
-            <div class="post-content">
             <?php 
-                    $durumsor=$db->prepare("SELECT * FROM durum where kullanici_id=:kullanici_id order by zaman DESC");
-                    $durumsor->execute(array(
-                        'kullanici_id' => $_SESSION['userkullanici_id']
-                    ));
-                    $say=0;
-                    while($durumlarıcek=$durumsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
-                     
-                    <div class="user-info" style="margin-top:5%">
-                    <img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-md pull-left" /><div class="post-detail">
-                    <!---Kullanıcı adı ve soyadı çekme -->
-                      <h5><a href="timeline.html" class="profile-link"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a> <span class="following">following</span></h5>
-                      <p class="text-muted"><?php echo $durumlarıcek['zaman'] ?></p>
+                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto FROM kullanici limit 7");
+                    $cekFollow->execute();
+                    while($kullaniclariCek=$cekFollow->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <div class="friend-list">
+              	    <div class="row">
+            		    <div class="col-md-12 col-sm-12">
+                    <div class="friend-card">
+                    <img src="images/covers/1.jpg" alt="profile-cover" class="img-responsive cover" />
+                    <div class="card-info">
+                    <img src="<?php echo $kullaniclariCek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-lg"/>
+                    <div class="friend-info">
+                    <a href="#" class="pull-right text-green">Mesaj Gönder</a>
+                    <?php echo $kullaniclariCek['kullanici_ad']." ".$kullaniclariCek['kullanici_soyad'] ?>
+                      </div>
+                      </div>
                     </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text"><!-- Durum tablosudan çekilen veriler buraya gelecek -->
-                    <p>
-                    <?php echo $durumlarıcek['durum'] ?>
-                    <a href="newsfeed?durum_id=<?php echo $durumlarıcek['durum_id'] ?>"><button class="btn btn-primary btn-xs" style="float:right;">Düzenle</button></a>
-                    </p>
-                    </div>
-                    <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i>Beğeni 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> Beğenmeme 0</a>
-                    </div>      
-                    <div class="line-divider"></div>
-                   <div class="post-comment"><!--Yorumlar buraya gelecek -->
-                    <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                   <div class="post-comment" style="margin-top:3%;">
-                   <table>  
-                      <tr>
-                        <td>
-                        <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                        </td>
-                        <td><input type="text" class="form-control" placeholder="Yorum Gönder">
-                        </td>
-                        <td><button class="btn btn-primary btn-xs" style="float:right;">Gönder</button></a></td>
-                      </tr>
-                   </table>
-                   <div class="line-divider"></div>
-                    </div>
-                  </div>
-                  <?php } ?>
+                  </div>           		
+                </div>
+              </div>
+                    <?php } 
+                    
+            ?>
             </div>
-          </div>
+            
 
+  
            <!-- Newsfeed Common Side Bar Right
           ================================================= -->
     			<div class="col-md-2 static">
@@ -225,7 +200,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
     	</div>
     </div>
 
-    <!-- Footer
+  <!-- Footer
     ================================================= -->
     <footer id="footer">
       <div class="container">
