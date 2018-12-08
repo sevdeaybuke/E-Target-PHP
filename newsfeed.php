@@ -226,45 +226,23 @@ if (isset($_SESSION['userkullanici_mail'])) {
 
           </div>
 
-          <!-- Newsfeed Common Side Bar Right
+           <!-- Newsfeed Common Side Bar Right
           ================================================= -->
     			<div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
               <h4 class="grey">Takip Et</h4>
               <div class="follow-user">
-                <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Takip Et</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-12.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Takip Et</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-13.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Takip Et</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-14.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Takip Et</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-15.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Takip Et</a>
-                </div>
+                <ul>
+                  <?php 
+                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto FROM kullanici limit 7");
+                    $cekFollow->execute();
+                    while($kullaniclariCek=$cekFollow->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <li><a href="<?=seo($kullaniclariCek["kullanici_ad"],$kullaniclariCek["kullanici_soyad"],$kullaniclariCek["kullanici_magazafoto"]) ?>">
+                    <img src="<?php echo $kullaniclariCek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo"/>
+                    <?php echo $kullaniclariCek['kullanici_ad']." ".substr($kullaniclariCek['kullanici_soyad'], 0,1) ?>.
+                    <?php } 
+                  ?>
+                </ul>
               </div>
             </div>
           </div>
