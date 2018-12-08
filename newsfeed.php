@@ -153,37 +153,77 @@ if (isset($_SESSION['userkullanici_mail'])) {
             <!-- Post Content
             ================================================= -->
             <div class="post-content">
-              <div class="post-container">
-                <!-- Kullanici resmi buraya geliyor -->
-                <img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                  <!---Kullanıcı adı ve soyadı çekme -->
-                    <h5><a href="timeline.html" class="profile-link"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Durumların çekilme zamanı</p>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text"><!-- Durum tablosudan çekilen veriler buraya gelecek -->
-                    <p>Yazılan durum yazıları <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-comment"><!--Yorumlar buraya gelecek -->
+            <?php 
+                    $durumsor=$db->prepare("SELECT * FROM durum where kullanici_id=:kullanici_id order by zaman DESC");
+                    $durumsor->execute(array(
+                        'kullanici_id' => $_SESSION['userkullanici_id']
+                    ));
+                    $say=0;
+                    while($durumlarıcek=$durumsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
+                     
+                    <div class="user-info" style="margin-top:5%">
+                    <img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-md pull-left" /><div class="post-detail">
+                    <!---Kullanıcı adı ve soyadı çekme -->
+                      <h5><a href="timeline.html" class="profile-link"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a> <span class="following">following</span></h5>
+                      <p class="text-muted"><?php echo $durumlarıcek['zaman'] ?></p>
+                    </div>
+                    <div class="line-divider"></div>
+                    <div class="post-text"><!-- Durum tablosudan çekilen veriler buraya gelecek -->
+                    <p>
+                    <?php echo $durumlarıcek['durum'] ?>
+                    <a href="newsfeed?durum_id=<?php echo $durumlarıcek['durum_id'] ?>"><button class="btn btn-primary btn-xs" style="float:right;">Düzenle</button></a>
+                    </p>
+                    </div>
+                    <div class="reaction">
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i>Beğeni 13</a>
+                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> Beğenmeme 0</a>
+                    </div>      
+                    <div class="line-divider"></div>
+                   <div class="post-comment"><!--Yorumlar buraya gelecek -->
                     <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
                     <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                    </div>
+                   <div class="post-comment" style="margin-top:3%;">
+                   <table>  
+                      <tr>
+                        <td>
+                        <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="Yorum Gönder">
+                        </td>
+                        <td><button class="btn btn-primary btn-xs" style="float:right;">Gönder</button></a></td>
+                      </tr>
+                   </table>
+                   <div class="line-divider"></div>
+                    </div>
                   </div>
-                  <div class="post-comment">
-                    <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Yorum Gönder">
-                  </div>
-                </div>
-              </div>
+                  <?php } ?>
             </div>
 
-     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
 
           <!-- Newsfeed Common Side Bar Right
