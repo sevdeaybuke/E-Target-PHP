@@ -2,9 +2,9 @@
 ob_start();
 session_start();
 date_default_timezone_set('Europe/Istanbul');
-
 //error_reporting(0); //Hatalar Gizlenir => Hatalarınızı göremezsiniz. /tüm işler bittikten sonra kullanın.
 require_once 'nedmin/netting/baglan.php';
+require_once 'nedmin/netting/islem.php';
 require_once 'nedmin/production/fonksiyon.php';
 
 if (isset($_SESSION['userkullanici_mail'])) {
@@ -30,13 +30,6 @@ if (isset($_SESSION['userkullanici_mail'])) {
 
 ?>
   
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -136,8 +129,9 @@ if (isset($_SESSION['userkullanici_mail'])) {
             	<div class="row">
             		<div class="col-md-7 col-sm-7">
                   <div class="form-group">
-                    <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Ne düşünüyorsun ? "></textarea>
+                    <img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="" class="profile-photo-md" />
+                    <form action="" method="POST">
+                    <input type="text" name="durum"  cols="30" rows="1" class="form-control" placeholder="Ne düşünüyorsun ? "/>                   
                   </div>
                 </div>
             		<div class="col-md-5 col-sm-5">
@@ -148,11 +142,13 @@ if (isset($_SESSION['userkullanici_mail'])) {
                       <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                       <li><a href="#"><i class="ion-map"></i></a></li>
                     </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
+                    <button  type="submit" class="btn btn-primary pull-right" name="btnGonder">Gönder</button>
+                    </form>
                   </div>
                 </div>
             	</div>
             </div><!-- Post Create Box End-->
+  
 
             <!-- Post Content
             ================================================= -->

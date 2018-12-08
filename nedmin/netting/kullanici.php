@@ -638,6 +638,7 @@ if (isset($_POST['mesajgonder'])) {
 }
 
 
+
 if (isset($_POST['mesajcevapver'])) {
 
 	$kullanici_gel=$_POST['kullanici_gel'];

@@ -806,6 +806,32 @@ if (isset($_POST['urunduzenle'])) {
 }
 
 
+#durum gönderme
+if (isset($_POST['btnGonder'])) {
+
+
+	$gelen_url=$_POST['gelen_url'];
+
+	$durumekle=$db->prepare("INSERT INTO durum SET
+		durum=:durum,
+		kullanici_id={$_SESSION['userkullanici_id']}
+		");
+
+	$insert=$durumekle->execute(array(
+		'durum' => $_POST['durum']
+	));
+
+
+	if ($insert) {
+
+		Header("Location:$gelen_url?durum=ok");
+
+	} else {
+
+		Header("Location:$gelen_url?durum=no");
+	}
+
+}
 
 
 if (isset($_POST['yorumkaydet'])) {
