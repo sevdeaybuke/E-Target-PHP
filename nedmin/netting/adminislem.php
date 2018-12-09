@@ -469,7 +469,6 @@ if (isset($_POST['btnHedefEkle'])) {
 
 
 //Hedef Düzenleme İşlemleri
-//Mağaza Ürün Düzenleme İşlemleri
 
 if (isset($_POST['btnHedefDuzenle'])) {
 
@@ -748,6 +747,70 @@ if (isset($_POST['magazaurunduzenle'])) {
 	}
 
 }
+
+
+
+//Hedef Silme İşlemi
+
+if ($_GET['btnHedefSil']=="ok") {
+
+
+
+	$sil=$db->prepare("DELETE from hedef where hedef_id=:hedef_id");
+	$kontrol=$sil->execute(array(
+		'hedef_id' => $_GET['hedef_id']
+	));
+
+	if ($kontrol) {
+
+		$resimsilunlink=$_GET['urunfoto_resimyol'];
+		unlink("../../$resimsilunlink");
+
+		Header("Location:../../hedeflerim.php?durum=ok");
+
+	} else {
+
+		Header("Location:../../hedeflerim.php?durum=hata");
+	}
+
+}
+
+
+if (isset($_POST['kategoriduzenle'])) {
+
+	$kategori_id=$_POST['kategori_id'];
+	$kategori_seourl=seo($_POST['kategori_ad']);
+
+
+	$kaydet=$db->prepare("UPDATE kategori SET
+		kategori_ad=:ad,
+		kategori_durum=:kategori_durum,
+		kategori_seourl=:seourl,
+		kategori_onecikar=:kategori_onecikar,
+		kategori_sira=:sira
+		WHERE kategori_id={$_POST['kategori_id']}");
+	$update=$kaydet->execute(array(
+		'ad' => htmlspecialchars($_POST['kategori_ad']),
+		'kategori_durum' => htmlspecialchars($_POST['kategori_durum']),
+		'seourl' => $kategori_seourl,
+		'kategori_onecikar' => htmlspecialchars($_POST['kategori_onecikar']),
+		'sira' => $_POST['kategori_sira']
+	));
+
+	if ($update) {
+
+		Header("Location:../production/kategori-duzenle.php?durum=ok&kategori_id=$kategori_id");
+
+	} else {
+
+		Header("Location:../production/kategori-duzenle.php?durum=no&kategori_id=$kategori_id");
+	}
+
+}
+
+
+
+
 
 //Ürün Silme İşlemi
 

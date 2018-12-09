@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 09 Ara 2018, 21:56:25
+-- Üretim Zamanı: 09 Ara 2018, 22:26:12
 -- Sunucu sürümü: 10.1.36-MariaDB
 -- PHP Sürümü: 7.2.10
 
@@ -181,6 +181,28 @@ INSERT INTO `hedef` (`hedef_id`, `kullanici_id`, `kategori_id`, `hedef_zaman`, `
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `hedef_detay`
+--
+
+CREATE TABLE `hedef_detay` (
+  `hedefdetay_id` int(11) NOT NULL,
+  `siparis_id` int(11) NOT NULL,
+  `kullanici_id` int(11) NOT NULL,
+  `kullanici_idsatici` int(11) NOT NULL,
+  `hedef_id` int(11) NOT NULL,
+  `hedef_fiyat` float(9,2) NOT NULL,
+  `hedef_adet` int(3) NOT NULL,
+  `hedefdetay_kargozaman` datetime NOT NULL,
+  `hedefdetay_kargoad` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `hedefdetay_kargono` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `hedefdetay_onay` enum('0','1','2') COLLATE utf8_turkish_ci NOT NULL DEFAULT '0',
+  `hedefdetay_yorum` enum('0','1') COLLATE utf8_turkish_ci NOT NULL DEFAULT '0',
+  `hedefdetay_onayzaman` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `kategori`
 --
 
@@ -252,7 +274,7 @@ INSERT INTO `kullanici` (`kullanici_id`, `subMerchantKey`, `kullanici_magaza`, `
 (172, '', '0', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-08 15:59:36', '', '', '', NULL, 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (173, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 01:09:22', '0000-00-00 00:00:00', '', '', '', NULL, 'deneme', 'deneme', 'd', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-09 00:39:14', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
-(175, '', '2', 'dimg/test/5c0d778c1ce13.png', '2018-12-09 23:09:52', '2018-12-09 23:55:32', '', '21231321321', 'ds', '131241242', 'deneme', 'deneme', 'deneme', '454545', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'asdas', '', 'PERSONAL', '', '', '1', 1);
+(175, '', '2', 'dimg/test/5c0d778c1ce13.png', '2018-12-09 23:09:52', '2018-12-10 00:23:51', '', '21231321321', 'ds', '131241242', 'deneme', 'deneme', 'deneme', '454545', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'asdas', '', 'PERSONAL', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -477,8 +499,23 @@ INSERT INTO `urun` (`urun_id`, `kullanici_id`, `kategori_id`, `urun_zaman`, `uru
 (43, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Nalbur Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
 (44, 166, 15, '2017-12-04 17:42:16', 'dimg/urunfoto/5a2588f81f6bd.png', 'Firma Scripti', 'haber-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 59.00, 0, '', '', 0, '1', '1'),
 (45, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Havayolu Acentesi Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
-(46, 166, 17, '2017-12-09 12:43:59', 'dimg/urunfoto/5a2bda8fabbab.png', 'emrahyuksel.com.tr Alan Adı', '', '&lt;p&gt;emrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adı&lt;/p&gt;', 1000.00, 0, '', '', 0, '1', '0'),
-(47, 175, 19, '2018-12-09 20:34:50', 'dimg/urunfoto/5c0d7c6aed9d3.jpg', 'Fü kazanacağım', '', '&lt;p&gt;f&amp;uuml; de yazılım m&amp;uuml;hendisliği okuyacağım&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0');
+(46, 166, 17, '2017-12-09 12:43:59', 'dimg/urunfoto/5a2bda8fabbab.png', 'emrahyuksel.com.tr Alan Adı', '', '&lt;p&gt;emrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adı&lt;/p&gt;', 1000.00, 0, '', '', 0, '1', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `yorumhedef`
+--
+
+CREATE TABLE `yorumhedef` (
+  `yorumhedef_id` int(11) NOT NULL,
+  `kullanici_id` int(11) NOT NULL,
+  `hedef_id` int(11) NOT NULL,
+  `yorumhedef_detay` text COLLATE utf8_turkish_ci NOT NULL,
+  `yorumhedef_puan` int(11) NOT NULL,
+  `yorumhedef_zaman` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `yorumhedef_onay` enum('0','1') COLLATE utf8_turkish_ci DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
