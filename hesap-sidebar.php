@@ -5,7 +5,7 @@
 
 		if ($kullanicicek['kullanici_magaza']!=2) {?>
 
-		<li ><a href="magaza-basvuru" >Hedef Başvuru</a></li>
+		<li ><a href="hedef-basvuru" >Hedef Başvuru</a></li>
 
 		<?php }?>
 
