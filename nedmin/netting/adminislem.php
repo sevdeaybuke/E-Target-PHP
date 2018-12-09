@@ -378,6 +378,239 @@ if (isset($_POST['magazaurunekle'])) {
 }
 
 
+//Hedef Belirleme İşlemleri
+
+if (isset($_POST['btnHedefEkle'])) {
+
+
+	if ($_FILES['urunfoto_resimyol']['size']>1048576) {
+
+		echo "Bu dosya boyutu çok büyük";
+
+		Header("Location:../../hedefbelirle.php?durum=dosyabuyuk");
+
+	}
+
+
+	$izinli_uzantilar=array('jpg','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+	$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+
+
+
+	if (in_array($ext, $izinli_uzantilar) === false) {
+		echo "Bu uzantı kabul edilmiyor";
+		Header("Location:../../hedefbelirle.php?durum=formathata");
+
+		exit;
+	}
+
+	@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+	@$name = $_FILES['urunfoto_resimyol']["name"];
+
+	//İmage Resize İşlemleri
+	include('SimpleImage.php');
+	$image = new SimpleImage();
+	$image->load($tmp_name);
+	$image->resize(829,422);
+	$image->save($tmp_name);
+
+	$uploads_dir = '../../dimg/urunfoto';
+
+
+
+	$uniq=uniqid();
+	$refimgyol=substr($uploads_dir, 6)."/".$uniq.".".$ext;
+
+	@move_uploaded_file($tmp_name, "$uploads_dir/$uniq.$ext");
+
+
+
+
+	$duzenle=$db->prepare("INSERT INTO hedef SET
+
+		kategori_id=:kategori_id,
+		kullanici_id=:kullanici_id,
+		hedef_ad=:hedef_ad,
+		hedef_detay=:hedef_detay,
+		hedef_fiyat=:hedef_fiyat,
+		urunfoto_resimyol=:urunfoto_resimyol
+
+		");
+
+	$update=$duzenle->execute(array(
+
+		'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+		'kullanici_id' => htmlspecialchars($_SESSION['userkullanici_id']),
+		'hedef_ad' => htmlspecialchars($_POST['hedef_ad']),
+		'hedef_detay' => htmlspecialchars($_POST['hedef_detay']),
+		'hedef_fiyat' => htmlspecialchars($_POST['hedef_fiyat']),
+		'urunfoto_resimyol' => $refimgyol
+	));
+
+
+
+	if ($update) {
+
+
+		Header("Location:../../hedeflerim.php?durum=ok");
+
+	} else {
+
+		Header("Location:../../hedefbelirle.php?durum=hata");
+	}
+
+}
+
+
+
+
+//Hedef Düzenleme İşlemleri
+//Mağaza Ürün Düzenleme İşlemleri
+
+if (isset($_POST['btnHedefDuzenle'])) {
+
+	if ($_FILES['urunfoto_resimyol']['size']>0) {
+
+
+		if ($_FILES['urunfoto_resimyol']['size']>1048576) {
+
+			echo "Bu dosya boyutu çok büyük";
+
+			Header("Location:../../hedefduzenle.php?durum=dosyabuyuk");
+
+		}
+
+
+		$izinli_uzantilar=array('jpg','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+		$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+
+
+
+		if (in_array($ext, $izinli_uzantilar) === false) {
+			echo "Bu uzantı kabul edilmiyor";
+			Header("Location:../../hedefduzenle.php?durum=formathata");
+
+			exit;
+		}
+
+		@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+		@$name = $_FILES['urunfoto_resimyol']["name"];
+
+	//İmage Resize İşlemleri
+		include('SimpleImage.php');
+		$image = new SimpleImage();
+		$image->load($tmp_name);
+		$image->resize(829,422);
+		$image->save($tmp_name);
+
+		$uploads_dir = '../../dimg/urunfoto';
+
+
+
+		$uniq=uniqid();
+		$refimgyol=substr($uploads_dir, 6)."/".$uniq.".".$ext;
+
+		@move_uploaded_file($tmp_name, "$uploads_dir/$uniq.$ext");
+
+
+
+
+		$duzenle=$db->prepare("UPDATE hedef SET
+
+			kategori_id=:kategori_id,
+			hedef_ad=:hedef_ad,
+			hedef_detay=:hedef_detay,
+			hedef_fiyat=:hedef_fiyat,
+			urunfoto_resimyol=:urunfoto_resimyol
+			WHERE hedef_id={$_POST['hedef_id']}");
+
+
+		$update=$duzenle->execute(array(
+
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'hedef_ad' => htmlspecialchars($_POST['hedef_ad']),
+			'hedef_detay' => htmlspecialchars($_POST['hedef_detay']),
+			'hedef_fiyat' => htmlspecialchars($_POST['hedef_fiyat']),
+			'urunfoto_resimyol' => $refimgyol
+		));
+
+
+		$urun_id=$_POST['hedef_id'];
+
+		if ($update) {
+
+			$resimsilunlink=$_POST['eski_yol'];
+			unlink("../../$resimsilunlink");
+
+
+
+
+			Header("Location:../../hedefduzenle.php?durum=ok&hedef_id=$urun_id");
+
+		} else {
+
+			Header("Location:../../hedefduzenle.php?durum=hata&hedef_id=$urun_id");
+		}
+
+
+	} else {
+
+
+//Fotoğraf Yoksa İşlemler
+
+
+		$duzenle=$db->prepare("UPDATE hedef SET
+
+			kategori_id=:kategori_id,
+			hedef_ad=:hedef_ad,
+			hedef_detay=:hedef_detay,
+			hedef_fiyat=:hedef_fiyat
+
+			WHERE hedef_id={$_POST['hedef_id']}");
+
+
+		$update=$duzenle->execute(array(
+
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'hedef_ad' => htmlspecialchars($_POST['hedef_ad']),
+			'hedef_detay' => htmlspecialchars($_POST['hedef_detay']),
+			'hedef_fiyat' => htmlspecialchars($_POST['hedef_fiyat'])
+
+		));
+
+
+		$urun_id=$_POST['hedef_id'];
+
+		if ($update) {
+
+
+			Header("Location:../../hedefduzenle.php?durum=ok&hedef_id=$urun_id");
+
+		} else {
+
+			Header("Location:../../hedefduzenle.php?durum=hata&hedef_id=$urun_id");
+		}
+
+
+
+
+	}
+
+}
+
+
+
+
+
+
 
 //Mağaza Ürün Düzenleme İşlemleri
 

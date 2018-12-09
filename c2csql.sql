@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 08 Ara 2018, 12:18:03
+-- Üretim Zamanı: 09 Ara 2018, 21:56:25
 -- Sunucu sürümü: 10.1.36-MariaDB
 -- PHP Sürümü: 7.2.10
 
@@ -116,7 +116,14 @@ INSERT INTO `durum` (`durum_id`, `kullanici_id`, `durum`, `zaman`, `resim`) VALU
 (6, 172, 'saat 13', '2018-12-08 13:11:05', ''),
 (7, 172, 'dsdsds', '2018-12-08 13:25:09', ''),
 (8, 172, 'asdasdsa', '2018-12-08 13:30:05', ''),
-(9, 172, '', '2018-12-08 13:30:08', '');
+(9, 172, '', '2018-12-08 13:30:08', ''),
+(10, 172, 'jkhjk', '2018-12-08 14:48:12', ''),
+(11, 172, 'sdsd', '2018-12-08 15:34:59', ''),
+(12, 172, 'sadsa', '2018-12-08 15:42:25', ''),
+(13, 174, 'merhaba ben fake hesab?m', '2018-12-09 00:39:39', ''),
+(14, 174, 'dddd', '2018-12-09 00:40:20', ''),
+(15, 174, 'oaknnn', '2018-12-09 00:41:21', ''),
+(16, 175, 'Herkese Selam', '2018-12-09 23:16:00', '');
 
 -- --------------------------------------------------------
 
@@ -143,6 +150,37 @@ INSERT INTO `hakkimizda` (`hakkimizda_id`, `hakkimizda_baslik`, `hakkimizda_icer
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `hedef`
+--
+
+CREATE TABLE `hedef` (
+  `hedef_id` int(11) NOT NULL,
+  `kullanici_id` int(11) NOT NULL,
+  `kategori_id` int(11) NOT NULL,
+  `hedef_zaman` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `urunfoto_resimyol` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_ad` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_seourl` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_detay` text COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_fiyat` float(9,2) NOT NULL,
+  `hedef_satis` int(4) NOT NULL DEFAULT '0',
+  `hedef_video` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_keyword` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_stok` int(11) NOT NULL,
+  `hedef_durum` enum('0','1') COLLATE utf8_turkish_ci NOT NULL,
+  `hedef_onecikar` enum('0','1') COLLATE utf8_turkish_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `hedef`
+--
+
+INSERT INTO `hedef` (`hedef_id`, `kullanici_id`, `kategori_id`, `hedef_zaman`, `urunfoto_resimyol`, `hedef_ad`, `hedef_seourl`, `hedef_detay`, `hedef_fiyat`, `hedef_satis`, `hedef_video`, `hedef_keyword`, `hedef_stok`, `hedef_durum`, `hedef_onecikar`) VALUES
+(0, 175, 19, '2018-12-09 20:45:31', 'dimg/urunfoto/5c0d7eebaa0e7.jpg', 'Mac book pro alıcam', '', '&lt;p&gt;&lt;strong&gt;Para biriktirip mac alıcam&lt;/strong&gt;&lt;/p&gt;', 100.00, 0, '', '', 0, '0', '0');
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `kategori`
 --
 
@@ -160,11 +198,12 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`kategori_id`, `kategori_ad`, `kategori_onecikar`, `kategori_seourl`, `kategori_sira`, `kategori_durum`) VALUES
-(14, 'Html Template', '1', 'html-template', 1, '1'),
-(15, 'Php Script', '1', 'php-script', 2, '1'),
+(14, 'Html Template', '1', 'html-template', 4, '1'),
 (16, 'Wordpress Template', '1', 'wordpress-template', 3, '1'),
 (17, 'Alan Adı', '1', 'alan-adi', 4, '1'),
-(18, 'E-Commerce', '1', 'e-commerce', 5, '1');
+(18, 'E-Commerce', '1', 'e-commerce', 5, '1'),
+(19, 'Okul', '0', 'okul', 1, '1'),
+(20, 'Seyahat', '0', 'seyahat', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -204,15 +243,16 @@ CREATE TABLE `kullanici` (
 --
 
 INSERT INTO `kullanici` (`kullanici_id`, `subMerchantKey`, `kullanici_magaza`, `kullanici_magazafoto`, `kullanici_zaman`, `kullanici_sonzaman`, `kullanici_resim`, `kullanici_tc`, `kullanici_banka`, `kullanici_iban`, `kullanici_ad`, `kullanici_soyad`, `kullanici_mail`, `kullanici_gsm`, `kullanici_password`, `kullanici_adres`, `kullanici_il`, `kullanici_ilce`, `kullanici_unvan`, `kullanici_tip`, `kullanici_vdaire`, `kullanici_vno`, `kullanici_yetki`, `kullanici_durum`) VALUES
-(153, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-07-31 11:31:57', '0000-00-00 00:00:00', '', '', '', NULL, 'Emrah', 'Yüksel', 'info@emrahyuksel.com.tr', '', 'e10adc3949ba59abbe56e057f20f883e', 's1', 'İstanbul', 'Çatalca', 'sdf', 'PERSONAL', 'sdf', 'sdf', '5', 1),
-(166, '', '2', 'dimg/test/5a2b97af021ac.jpg', '2017-12-08 21:51:51', '2017-12-09 23:03:57', '', '12345678910', 'Garantia', 'TR121312', 'Emrah', 'Yüksel', 'satici@emrahyuksel.com.tr', '08508408076', 'dc483e80a7a0bd9ef71d8cf973673924', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
+(153, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-07-31 11:31:57', '0000-00-00 00:00:00', '', '', '', NULL, 'Emrah', 'Yüksel', 'info@emrahyuksel.com.tr', '', '123456', 's1', 'İstanbul', 'Çatalca', 'sdf', 'PERSONAL', 'sdf', 'sdf', '5', 1),
+(166, '', '2', 'dimg/test/5a2b97af021ac.jpg', '2017-12-08 21:51:51', '2017-12-09 23:03:57', '', '12345678910', 'Garantia', 'TR121312', 'Emrah', 'Yüksel', 'satici@emrahyuksel.com.tr', '08508408076', '123456', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (168, '', '0', 'dimg/test/5a2988bb8a36d.jpg', '2017-12-02 16:18:40', '2017-12-10 12:26:32', '', '12345678910', 'Garantia', 'TR121312', 'Naci', 'Yüksel', 'alici@emrahyuksel.com.tr', '08508408076', 'dc483e80a7a0bd9ef71d8cf973673924', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (169, '', '0', 'dimg/test/5a2bbf7b7a385.jpg', '2017-12-09 12:45:24', '0000-00-00 00:00:00', '', '', '', NULL, 'Ahmet', 'Korkmaz', 'alici1@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (170, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-12-09 15:51:51', '0000-00-00 00:00:00', '', '', '', NULL, 'Murat', 'Sönmez', 'alici2@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (171, '', '0', 'dimg/test/5c08f78a17737.jpg', '2018-12-06 13:16:28', '0000-00-00 00:00:00', '', '', '', NULL, 'Sevde Aybüke', 'Kaleli', 'sevdeaybuke@gmail.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '5', 1),
-(172, '', '0', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-08 14:09:31', '', '', '', NULL, 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
+(172, '', '0', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-08 15:59:36', '', '', '', NULL, 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (173, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 01:09:22', '0000-00-00 00:00:00', '', '', '', NULL, 'deneme', 'deneme', 'd', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
-(174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-08 11:11:20', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1);
+(174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-09 00:39:14', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
+(175, '', '2', 'dimg/test/5c0d778c1ce13.png', '2018-12-09 23:09:52', '2018-12-09 23:55:32', '', '21231321321', 'ds', '131241242', 'deneme', 'deneme', 'deneme', '454545', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'asdas', '', 'PERSONAL', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -274,7 +314,8 @@ INSERT INTO `mesaj` (`mesaj_id`, `mesaj_zaman`, `mesaj_detay`, `kullanici_gel`, 
 (43, '2017-12-09 11:16:09', '<p>bildirim son kontrol 5</p>', 166, 169, '1'),
 (44, '2017-12-09 11:16:26', '<p>bildirim kontrol araya gir</p>', 166, 168, '1'),
 (45, '2017-12-09 19:37:06', '<p>asdasdasd</p>', 169, 166, '0'),
-(46, '2017-12-09 19:37:25', '<p>rtytry</p>', 169, 166, '0');
+(46, '2017-12-09 19:37:25', '<p>rtytry</p>', 169, 166, '0'),
+(47, '2018-12-08 11:40:16', '<p>sadasda</p>', 166, 172, '1');
 
 -- --------------------------------------------------------
 
@@ -436,7 +477,8 @@ INSERT INTO `urun` (`urun_id`, `kullanici_id`, `kategori_id`, `urun_zaman`, `uru
 (43, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Nalbur Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
 (44, 166, 15, '2017-12-04 17:42:16', 'dimg/urunfoto/5a2588f81f6bd.png', 'Firma Scripti', 'haber-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 59.00, 0, '', '', 0, '1', '1'),
 (45, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Havayolu Acentesi Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
-(46, 166, 17, '2017-12-09 12:43:59', 'dimg/urunfoto/5a2bda8fabbab.png', 'emrahyuksel.com.tr Alan Adı', '', '&lt;p&gt;emrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adı&lt;/p&gt;', 1000.00, 0, '', '', 0, '1', '0');
+(46, 166, 17, '2017-12-09 12:43:59', 'dimg/urunfoto/5a2bda8fabbab.png', 'emrahyuksel.com.tr Alan Adı', '', '&lt;p&gt;emrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adı&lt;/p&gt;', 1000.00, 0, '', '', 0, '1', '0'),
+(47, 175, 19, '2018-12-09 20:34:50', 'dimg/urunfoto/5c0d7c6aed9d3.jpg', 'Fü kazanacağım', '', '&lt;p&gt;f&amp;uuml; de yazılım m&amp;uuml;hendisliği okuyacağım&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0');
 
 -- --------------------------------------------------------
 
@@ -568,19 +610,19 @@ ALTER TABLE `banka`
 -- Tablo için AUTO_INCREMENT değeri `durum`
 --
 ALTER TABLE `durum`
-  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `menu`
@@ -592,7 +634,7 @@ ALTER TABLE `menu`
 -- Tablo için AUTO_INCREMENT değeri `mesaj`
 --
 ALTER TABLE `mesaj`
-  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `sepet`
@@ -622,7 +664,7 @@ ALTER TABLE `slider`
 -- Tablo için AUTO_INCREMENT değeri `urun`
 --
 ALTER TABLE `urun`
-  MODIFY `urun_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `urun_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `yorumlar`
