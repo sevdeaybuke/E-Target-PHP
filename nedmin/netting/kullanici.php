@@ -460,11 +460,11 @@ if (isset($_POST['musterimagazabasvuru'])) {
 
 	if ($update) {
 		
-		Header("Location:../../hedef-basvuru");
+		Header("Location:../../hedefbasvuru");
 
 	} else {
 
-		Header("Location:../../hedef-basvuru?durum=hata");
+		Header("Location:../../hedefbasvuru?durum=hata");
 	}
 
 
