@@ -166,7 +166,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
             <div class="form-group">
 
               <div align="right" class="col-sm-12">
-               <button class="update-btn" name="btnHedefDuzenle" id="login-update">Hedef Düzenle</button>
+               <button class="update-btn" name="magazahedefduzenle" id="login-update">Hedef Düzenle</button>
 
              </div>
            </div>        
