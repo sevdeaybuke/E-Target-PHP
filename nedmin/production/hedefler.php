@@ -121,7 +121,7 @@ $urunsor->execute();
             </td>
 
 
-            <td><center><a href="hedefduzenle.php?hedef_id=<?php echo $uruncek['hedef_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
+            <td><center><a href="hedef-duzenle.php?hedef_id=<?php echo $uruncek['hedef_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
             <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize eminmisiniz?')" href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id']; ?>&hedefsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
           </tr>
 

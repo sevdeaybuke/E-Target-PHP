@@ -53,7 +53,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
               <!-- Kategori seçme başlangıç -->
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Resim <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hedef Resim <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                  <img width="200" src="../../<?php echo $uruncek['urunfoto_resimyol'] ?>">
@@ -62,6 +62,43 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
 
               <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Seç<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+
+                  <?php  
+
+                  $urun_id=$uruncek['kategori_id']; 
+
+                  $kategorisor=$db->prepare("select * from kategori where kategori_ust=:kategori_ust order by kategori_sira");
+                  $kategorisor->execute(array(
+                    'kategori_ust' => 0
+                    ));
+
+                    ?>
+                    <select class="select2_multiple form-control" required="" name="kategori_id" >
+
+
+                     <?php 
+
+                     while($kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC)) {
+
+                       $kategori_id=$kategoricek['kategori_id'];
+
+                       ?>
+
+                       <option <?php if ($kategori_id==$urun_id) { echo "selected='select'"; } ?> value="<?php echo $kategoricek['kategori_id']; ?>"><?php echo $kategoricek['kategori_ad']; ?></option>
+
+                       <?php } ?>
+
+                     </select>
+                   </div>
+                 </div>
+
+
+                 <!-- kategori seçme bitiş -->
+
+
                  <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hedef Ad <span class="required">*</span>
                   </label>
@@ -111,7 +148,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hedef Coin <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hedef Fiyat <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" id="first-name" name="hedef_fiyat" value="<?php echo $uruncek['hedef_fiyat'] ?>"  class="form-control col-md-7 col-xs-12">
@@ -122,7 +159,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
               
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Öne Çıkar<span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hedef Öne Çıkar<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                  <select id="heard" class="form-control" name="hedef_onecikar" required>
@@ -194,7 +231,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
              <div class="ln_solid"></div>
              <div class="form-group">
               <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" name="hedefduzenle" class="btn btn-success">Güncelle</button>
+                <button type="submit" name="hedefguncelle" class="btn btn-success">Güncelle</button>
               </div>
             </div>
 
