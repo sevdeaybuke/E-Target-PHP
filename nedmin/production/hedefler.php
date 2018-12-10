@@ -93,7 +93,7 @@ $urunsor->execute();
 
                  <td><center><?php 
 
-                  if ($uruncek['urun_durum']==1) {?>
+                  if ($uruncek['hedef_durum']==1) {?>
 
                   <button class="btn btn-success btn-xs">Aktif</button>
 
