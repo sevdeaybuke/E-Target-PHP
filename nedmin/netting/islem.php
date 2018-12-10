@@ -1329,6 +1329,89 @@ if (isset($_POST['mailayarkaydet'])) {
 	}
 
 }
+#Hedef ile ilgili olan işlemler
+
+if (isset($_POST['hedefekle'])) {
+
+	$urun_seourl=seo($_POST['hedef_ad']);
+
+	$kaydet=$db->prepare("INSERT INTO hedef SET
+		kategori_id=:kategori_id,
+		hedef_ad=:hedef_ad,
+		hedef_detay=:hedef_detay,
+		hedef_fiyat=:hedef_fiyat,
+		hedef_video=:hedef_video,
+		hedef_keyword=:hedef_keyword,
+		hedef_durum=:hedef_durum,
+		hedef_stok=:hedef_stok,
+		hedef_seourl=:seourl
+		");
+	$insert=$kaydet->execute(array(
+		'kategori_id' => $_POST['kategori_id'],
+		'hedef_ad' => $_POST['hedef_ad'],
+		'hedef_detay' => $_POST['hedef_detay'],
+		'hedef_fiyat' => $_POST['hedef_fiyat'],
+		'hedef_video' => $_POST['hedef_video'],
+		'hedef_keyword' => $_POST['hedef_keyword'],
+		'hedef_durum' => $_POST['hedef_durum'],
+		'hedef_stok' => $_POST['hedef_stok'],
+		'seourl' => $urun_seourl
+
+	));
+
+	if ($insert) {
+
+		Header("Location:../production/hedefler.php?durum=ok");
+
+	} else {
+
+		Header("Location:../production/hedefler.php?durum=no");
+	}
+
+}
+
+if (isset($_POST['hedefduzenle'])) {
+
+	$urun_id=$_POST['hedef_id'];
+	$urun_seourl=seo($_POST['hedef_ad']);
+
+	$kaydet=$db->prepare("UPDATE hedef SET
+		kategori_id=:kategori_id,
+		hedef_ad=:hedef_ad,
+		hedef_detay=:hedef_detay,
+		hedef_fiyat=:hedef_fiyat,
+		hedef_video=:hedef_video,
+		hedef_onecikar=:hedef_onecikar,
+		hedef_keyword=:hedef_keyword,
+		hedef_durum=:hedef_durum,
+		hedef_stok=:hedef_stok,
+		hedef_seourl=:seourl
+		WHERE hedef_id={$_POST['hedef_id']}");
+	$update=$kaydet->execute(array(
+		'kategori_id' => $_POST['kategori_id'],
+		'hedef_ad' => $_POST['hedef_ad'],
+		'hedef_detay' => $_POST['hedef_detay'],
+		'hedef_fiyat' => $_POST['hedef_fiyat'],
+		'hedef_video' => $_POST['hedef_video'],
+		'hedef_onecikar' => $_POST['hedef_onecikar'],
+		'hedef_keyword' => $_POST['hedef_keyword'],
+		'hedef_durum' => $_POST['hedef_durum'],
+		'hedef_stok' => $_POST['hedef_stok'],
+		'seourl' => $urun_seourl
+
+	));
+
+	if ($update) {
+
+		Header("Location:../production/hedef-duzenle.php?durum=ok&hedef_id=$urun_id");
+
+	} else {
+
+		Header("Location:../production/hedef-duzenle.php?durum=no&hedef_id=$urun_id");
+	}
+
+}
+
 
 
 ?>
