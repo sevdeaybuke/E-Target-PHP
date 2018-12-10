@@ -102,7 +102,7 @@ islemkontrol();
                                     <label class="col-sm-3 control-label">Açıklama</label>
                                     <div class="col-sm-9">
 
-                                        <textarea  class="ckeditor" id="editor1" name="hedef_detay" placeholder="Hedef Açıklaması..."></textarea>
+                                        <textarea  class="ckeditor" id="editor1" name="hedef_aciklama" placeholder="Hedef Açıklaması..."></textarea>
                                     </div>
                                 </div>
 
@@ -136,7 +136,7 @@ islemkontrol();
                                <div class="form-group">
                                     <label class="col-sm-3 control-label">Coin</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" required="" name="hedef_fiyat" id="first-name" placeholder="İstenilen Coin..." type="text">
+                                        <input class="form-control" required="" name="heef_fiyat" id="first-name" placeholder="Hedef Coin..." type="text">
                                     </div>
                                 </div>
 
@@ -154,7 +154,7 @@ islemkontrol();
                               <div class="form-group">
 
                                 <div align="right" class="col-sm-12">
-                                 <button class="update-btn" name="btnHedefEkle" id="login-update">Hedef Ekle</button>
+                                 <button class="update-btn" name="magazahedefekle" id="login-update">Hedef Ekle</button>
 
                              </div>
                          </div>        

@@ -416,7 +416,7 @@ if (isset($_POST['musterimagazabasvuru'])) {
 
 #Hedef Başvuru Kısmı
 
-if (isset($_POST['musterimagazabasvuru'])) {
+if (isset($_POST['kullanicihedefbasvuru'])) {
 	
 
 

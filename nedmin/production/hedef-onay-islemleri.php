@@ -236,7 +236,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
               <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 
 
-                <button type="submit" name="hedefonaykayit" class="btn btn-success">Başvuruyu Onayla</button>
+                <button type="submit" name="magazaonaykayit" class="btn btn-success">Başvuruyu Onayla</button>
 
                 </form>
 

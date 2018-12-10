@@ -3,8 +3,8 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$hedefsor=$db->prepare("SELECT * FROM hedef order by hedef_id DESC");
-$hedefsor->execute();
+$urunsor=$db->prepare("SELECT * FROM hedef order by hedef_id DESC");
+$urunsor->execute();
 
 
 ?>
@@ -39,6 +39,7 @@ $hedefsor->execute();
             </small></h2>
 
             <div class="clearfix"></div>
+
           </div>
           <div class="x_content">
 
@@ -49,9 +50,8 @@ $hedefsor->execute();
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>Kullanıcı</th>
-                  <th>Hedef Ad</th>
-                  <th>İstenilen Coin</th>
+                  <th>Hedeg Ad</th>
+                  <th>hedef Fiyat</th>
                   <th>Öne Çıkar</th>
                   <th>Durum</th>
                   <th></th>
@@ -65,34 +65,22 @@ $hedefsor->execute();
 
                 $say=0;
 
-                while($hedefcek=$hedefsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
+                while($uruncek=$urunsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
 
 
                 <tr>
                  <td width="20"><?php echo $say ?></td>
-                <?php
-                #kullanici adını çekmem lazım
-                $kullaniciadcek=$db->prepare("SELECT kullanici_ad,kullanici_soyad from kullanici 
-                INNER JOIN hedef on kullanici.kullanici_id=hedef.kullanici_id
-                where kullanici.kullanici_id=:kullanici_id
-                ");
-                 $kullaniciadcek->execute(array(
-                    'kullanici_id' => $_SESSION['userkullanici_id']
-                ));
-                
-                 ?>
-                 <td><?php echo $hedefcek['kullanici_id'] ?></td>
-                 <td><?php echo $hedefcek['hedef_ad'] ?></td>
-                 <td><?php echo $hedefcek['hedef_fiyat'] ?></td>
+                 <td><?php echo $uruncek['hedef_ad'] ?></td>
+                 <td><?php echo $uruncek['hedef_fiyat'] ?></td>
                  
                  <td><center><?php 
 
-                 if ($hedefcek['hedef_onecikar']==0) {?>
+                 if ($uruncek['urun_onecikar']==0) {?>
 
-                 <a href="../netting/islem.php?hedef_id=<?php echo $hedefcek['hedef_id'] ?>&hedef_one=1&hedef_onecikar=ok"><button class="btn btn-success btn-xs">Ön Çıkar</button></a>
+                 <a href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id'] ?>&hedef_one=1&hedef_onecikar=ok"><button class="btn btn-success btn-xs">Ön Çıkar</button></a>
                    
 
-                 <?php } elseif ($hedefcek['hedef_onecikar']==1) {?>
+                 <?php } elseif ($uruncek['urun_onecikar']==1) {?>
 
 
                  <a href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id'] ?>&hedef_one=0&hedef_onecikar=ok"><button class="btn btn-warning btn-xs">Kaldır</button></a>
@@ -105,7 +93,7 @@ $hedefsor->execute();
 
                  <td><center><?php 
 
-                  if ($hedefcek['hedef_durum']==1) {?>
+                  if ($uruncek['urun_durum']==1) {?>
 
                   <button class="btn btn-success btn-xs">Aktif</button>
 
@@ -133,8 +121,8 @@ $hedefsor->execute();
             </td>
 
 
-            <td><center><a href="hedef-duzenle.php?hedef_id=<?php echo $hedef['hedef_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
-            <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize eminmisiniz?')" href="../netting/islem.php?hedef_id=<?php echo $hedefcek['hedef_id']; ?>&hedefsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+            <td><center><a href="hedefduzenle.php?hedef_id=<?php echo $uruncek['hedef_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
+            <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize eminmisiniz?')" href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id']; ?>&hedefsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
           </tr>
 
 
