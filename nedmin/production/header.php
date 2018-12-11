@@ -37,6 +37,33 @@ if (!isset($_SESSION['kullanici_mail'])) {
 */
 ?>
 
+<?php
+
+if (isset($_SESSION['userkullanici_mail'])) {
+
+
+  $kullanicisor1=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+  $kullanicisor1->execute(array(
+    'mail' => $_SESSION['userkullanici_mail']
+));
+  $say=$kullanicisor1->rowCount();
+  $kullanicicek1=$kullanicisor1->fetch(PDO::FETCH_ASSOC);
+
+  //Kullanıcı ID Session Atama
+  if (!isset($_SESSION['userkullanici_id'])) {
+
+     $_SESSION['userkullanici_id']=$kullanicicek1['kullanici_id'];
+ }
+
+
+
+}
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,11 +123,10 @@ if (!isset($_SESSION['kullanici_mail'])) {
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              <img src="/proje/<?php echo $kullanicicek['kullanici_magazafoto']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-              <span>Hoşgeldin</span>
-              <h2><?php echo $kullanicicek['kullanici_adsoyad'] ?></h2>
+              <h2><?php echo $kullanicicek['kullanici_ad'] ?></h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -110,7 +136,6 @@ if (!isset($_SESSION['kullanici_mail'])) {
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
               <ul class="nav side-menu">
 
                 <li><a href="index.php"><i class="fa fa-home"></i> Anasayfa </a></li>
@@ -200,7 +225,7 @@ if (!isset($_SESSION['kullanici_mail'])) {
         <ul class="nav navbar-nav navbar-right">
           <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="images/img.jpg" alt=""><?php echo $kullanicicek['kullanici_adsoyad'] ?>
+              <img src="/proje/<?php echo $kullanicicek['kullanici_magazafoto']; ?>" alt=""><?php echo $kullanicicek['kullanici_adsoyad'] ?>
               <span class=" fa fa-angle-down"></span>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">

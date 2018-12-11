@@ -88,7 +88,12 @@
           keys: true
         });
 
-        $('#datatable-responsive').DataTable();
+        $('#datatable-responsive').DataTable({
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+        }
+
+        });
 
         $('#datatable-scroller').DataTable({
           ajax: "js/datatables/json/scroller-demo.json",

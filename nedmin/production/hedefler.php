@@ -3,7 +3,7 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$urunsor=$db->prepare("SELECT * FROM hedef order by hedef_id DESC");
+$urunsor=$db->prepare("SELECT *, (SELECT kullanici_ad FROM kullanici WHERE kullanici_id = hedef.kullanici_id) as kullanici_ad, (SELECT kullanici_soyad FROM kullanici WHERE kullanici_id = hedef.kullanici_id) as kullanici_soyad FROM hedef order by hedef_id DESC");
 $urunsor->execute();
 
 
@@ -50,8 +50,9 @@ $urunsor->execute();
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>Hedeg Ad</th>
-                  <th>hedef Fiyat</th>
+                  <th>Kullanıcı</th>
+                  <th>Hedef Ad</th>
+                  <th>Hedef Coin</th>
                   <th>Öne Çıkar</th>
                   <th>Durum</th>
                   <th></th>
@@ -70,17 +71,18 @@ $urunsor->execute();
 
                 <tr>
                  <td width="20"><?php echo $say ?></td>
+                 <td><?php echo $uruncek['kullanici_ad'] ?>&nbsp;<?php echo $uruncek['kullanici_soyad'] ?></td>
                  <td><?php echo $uruncek['hedef_ad'] ?></td>
                  <td><?php echo $uruncek['hedef_fiyat'] ?></td>
                  
                  <td><center><?php 
 
-                 if ($uruncek['urun_onecikar']==0) {?>
+                 if ($uruncek['hedef_onecikar']==0) {?>
 
-                 <a href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id'] ?>&hedef_one=1&hedef_onecikar=ok"><button class="btn btn-success btn-xs">Ön Çıkar</button></a>
+                 <a href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id'] ?>&hedef_one=1&hedef_onecikar=ok"><button class="btn btn-success btn-xs">Öne Çıkar</button></a>
                    
 
-                 <?php } elseif ($uruncek['urun_onecikar']==1) {?>
+                 <?php } elseif ($uruncek['hedef_onecikar']==1) {?>
 
 
                  <a href="../netting/islem.php?hedef_id=<?php echo $uruncek['hedef_id'] ?>&hedef_one=0&hedef_onecikar=ok"><button class="btn btn-warning btn-xs">Kaldır</button></a>

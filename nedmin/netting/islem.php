@@ -1331,5 +1331,141 @@ if (isset($_POST['mailayarkaydet'])) {
 }
 
 
+#magaza hedef duzenle admin kısmında
+
+if (isset($_POST['hedefguncelle'])) {
+
+	if ($_FILES['urunfoto_resimyol']['size']>0) {
+
+
+		if ($_FILES['urunfoto_resimyol']['size']>1048576) {
+
+			echo "Bu dosya boyutu çok büyük";
+
+			Header("Location:../../hedef-duzenle.php?durum=dosyabuyuk");
+
+		}
+
+
+		$izinli_uzantilar=array('jpg','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+		$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+
+
+
+		if (in_array($ext, $izinli_uzantilar) === false) {
+			echo "Bu uzantı kabul edilmiyor";
+			Header("Location:../../hedef-duzenle.php?durum=formathata");
+
+			exit;
+		}
+
+		@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+		@$name = $_FILES['urunfoto_resimyol']["name"];
+
+	//İmage Resize İşlemleri
+		include('SimpleImage.php');
+		$image = new SimpleImage();
+		$image->load($tmp_name);
+		$image->resize(829,422);
+		$image->save($tmp_name);
+
+		$uploads_dir = '../../dimg/urunfoto';
+
+
+
+		$uniq=uniqid();
+		$refimgyol=substr($uploads_dir, 6)."/".$uniq.".".$ext;
+
+		@move_uploaded_file($tmp_name, "$uploads_dir/$uniq.$ext");
+
+
+
+
+		$duzenle=$db->prepare("UPDATE hedef SET
+
+			kategori_id=:kategori_id,
+			hedef_ad=:hedef_ad,
+			hedef_detay=:hedef_detay,
+			hedef_fiyat=:hedef_fiyat,
+			urunfoto_resimyol=:urunfoto_resimyol,
+			hedef_durum=:hedef_durum
+			WHERE hedef_id={$_POST['hedef_id']}");
+
+
+		$update=$duzenle->execute(array(
+
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'hedef_ad' => htmlspecialchars($_POST['hedef_ad']),
+			'hedef_detay' => htmlspecialchars($_POST['hedef_detay']),
+			'hedef_fiyat' => htmlspecialchars($_POST['hedef_fiyat']),
+			'hedef_durum' => htmlspecialchars($_POST['hedef_durum']),
+			'urunfoto_resimyol' => $refimgyol
+		));
+
+
+		$urun_id=$_POST['hedef_id'];
+
+		if ($update) {
+
+			$resimsilunlink=$_POST['eski_yol'];
+			unlink("../../$resimsilunlink");
+
+
+
+
+			Header("Location:../../hedef-duzenle.php?durum=ok&hedef_id=$urun_id");
+
+		} else {
+
+			Header("Location:../../hedef-duzenle.php?durum=hata&hedef_id=$urun_id");
+		}
+
+
+	} else {
+
+
+//Fotoğraf Yoksa İşlemler
+
+		$duzenle=$db->prepare("UPDATE hedef SET
+			kategori_id=:kategori_id,
+			hedef_ad=:hedef_ad,
+			hedef_detay=:hedef_detay,
+			hedef_fiyat=:hedef_fiyat,
+			hedef_durum=:hedef_durum,
+			hedef_onecikar=:hedef_onecikar
+			WHERE hedef_id={$_POST['hedef_id']}");
+
+		$update=$duzenle->execute(array(
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'hedef_ad' => htmlspecialchars($_POST['hedef_ad']),
+			'hedef_detay' => htmlspecialchars($_POST['hedef_detay']),
+			'hedef_fiyat' => htmlspecialchars($_POST['hedef_fiyat']),
+			'hedef_durum' => htmlspecialchars($_POST['hedef_durum']),
+			'hedef_onecikar' => htmlspecialchars($_POST['hedef_onecikar'])
+		));
+
+		$urun_id=$_POST['hedef_id'];
+
+		if ($update) {
+
+			
+			Header("Location:../production/hedef-duzenle.php?durum=ok&hedef_id=$urun_id");
+
+		} else {
+
+			Header("Location:../production/hedef-duzenle.php?durum=hata&hedef_id=$urun_id");
+		}
+
+
+
+
+	}
+}
+
+
 
 ?>

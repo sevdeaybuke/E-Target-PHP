@@ -666,7 +666,7 @@ if (isset($_POST['magazahedefekle'])) {
 
 }
 
-#magaza hedef duzenle
+#magaza hedef duzenle kullanici kısmında
 
 if (isset($_POST['magazahedefduzenle'])) {
 
