@@ -169,7 +169,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     <div class="user-info" style="margin-top:5%">
                     <img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-md pull-left" /><div class="post-detail">
                     <!---Kullanıcı adı ve soyadı çekme -->
-                      <h5><a href="timeline.html" class="profile-link"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a> <span class="following">following</span></h5>
+                      <h5><a href="timeline.html" class="profile-link"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a></h5>
                       <p class="text-muted"><?php echo $durumlarıcek['zaman'] ?></p>
                     </div>
                     <div class="line-divider"></div>
@@ -178,9 +178,8 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     <a href="newsfeed?durum_id=<?php echo $durumlarıcek['durum_id'] ?>"><button class="btn btn-primary btn-xs" style="float:right;">Düzenle</button></a>
                     </p>
                     </div>
-                    <div class="reaction">
+                    <div class="reaction"><!--Beğeni kısmı buraya gelecek -->
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i>Beğeni 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> Beğenmeme 0</a>
                     </div>      
                     <div class="line-divider"></div>
                    <div class="post-comment"><!--Yorumlar buraya gelecek -->
