@@ -70,7 +70,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
                   $urun_id=$uruncek['kategori_id']; 
 
-                  $kategorisor=$db->prepare("select * from kategori where kategori_ust=:kategori_ust order by kategori_sira");
+                  $kategorisor=$db->prepare("select * from kategori");
                   $kategorisor->execute(array(
                     'kategori_ust' => 0
                     ));
@@ -148,7 +148,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Fiyat <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Coin <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" id="first-name" name="urun_fiyat" value="<?php echo $uruncek['urun_fiyat'] ?>"  class="form-control col-md-7 col-xs-12">

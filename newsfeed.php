@@ -157,7 +157,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             ================================================= -->
             <div class="post-content">
             <?php 
-                $durumsor=$db->prepare("SELECT * FROM durum INNER JOIN kullanici on kullanici.kullanici_id=durum.kullanici_id
+                $durumsor=$db->prepare("SELECT *, (SELECT Count(*) FROM begen WHERE durum_id = durum.durum_id) AS begenen_sayisi FROM durum INNER JOIN kullanici on kullanici.kullanici_id=durum.kullanici_id
                 where durum.kullanici_id=:kullanici_id
                  order by zaman DESC");
                     $durumsor->execute(array(
@@ -179,7 +179,9 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     </p>
                     </div>
                     <div class="reaction"><!--Beğeni kısmı buraya gelecek -->
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i>Beğeni 13</a>
+                      <a class="btn text-green" onclick="begen(<?php echo $durumlarıcek['durum_id'] ?>);">
+                        <i class="icon ion-thumbsup"></i>Beğeni <label id="begeni_sayisi_<?php echo $durumlarıcek['durum_id'] ?>"><?php echo $durumlarıcek['begenen_sayisi'] ?></label>
+                      </a>
                     </div>      
                     <div class="line-divider"></div>
                    <div class="post-comment"><!--Yorumlar buraya gelecek -->
@@ -256,5 +258,14 @@ if (isset($_SESSION['userkullanici_mail'])) {
     <script src="js/jquery.sticky-kit.min.js"></script>
     <script src="js/jquery.scrollbar.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+    function begen( durum_id ) {
+      $.post( "./nedmin/netting/islem.php", { durum_begen: true, durum_id: durum_id }, function( data ) {
+        var begeni_sayisi = $("#begeni_sayisi_"+durum_id);
+        begeni_sayisi.html(parseInt(begeni_sayisi.html())+1);
+      })
+    }
+    </script>
+
   </body>
 </html>

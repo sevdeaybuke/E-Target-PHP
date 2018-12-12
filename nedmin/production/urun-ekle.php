@@ -1,9 +1,5 @@
 <?php 
-
 include 'header.php'; 
-
-
-
 
 ?>
 
@@ -16,7 +12,7 @@ include 'header.php';
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Ürün Düzenleme <small>,
+            <h2>Ürün Ekleme <small>,
 
               <?php 
 
@@ -41,14 +37,20 @@ include 'header.php';
             <br />
 
             <!-- / => en kök dizine çık ... ../ bir üst dizine çık -->
-            <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <form action="../netting/islem.php" method="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-
+              <div class="form-group">
+                  <label class="col-sm-3 control-label">Fotoğraf</label>
+                  <div class="col-sm-6">
+                      <input class="form-control" required="" name="urunfoto_resimyol" id="first-name"  type="file">
+                  </div>
+              </div>
 
               <!-- Kategori seçme başlangıç -->
 
 
               <div class="form-group">
+
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Seç<span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -57,7 +59,7 @@ include 'header.php';
 
                   $urun_id=$uruncek['kategori_id']; 
 
-                  $kategorisor=$db->prepare("select * from kategori where kategori_ust=:kategori_ust order by kategori_sira");
+                  $kategorisor=$db->prepare("select * from kategori");
                   $kategorisor->execute(array(
                     'kategori_ust' => 0
                     ));
@@ -135,10 +137,10 @@ include 'header.php';
 
 
               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Fiyat <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Coin <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="urun_fiyat" placeholder="Ürün fiyat giriniz"  class="form-control col-md-7 col-xs-12">
+                  <input type="text" id="first-name" name="urun_fiyat" placeholder="Ürün coin giriniz"  class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
 

@@ -726,10 +726,47 @@ if ($_GET['urunsil']=="ok") {
 
 if (isset($_POST['urunekle'])) {
 
+	if ($_FILES['urunfoto_resimyol']['size']>1048576) {
+		
+		echo "Bu dosya boyutu çok büyük";
+
+		Header("Location:../production/urun-ekle.php?durum=dosyabuyuk");
+
+	}
+
+	$izinli_uzantilar=array('jpg','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+	$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+	if (in_array($ext, $izinli_uzantilar) === false) {
+		echo "Bu uzantı kabul edilmiyor";
+		Header("Location:../production/urun-ekle.php?durum=formathata");
+
+		exit;
+	}
+	@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+	@$name = $_FILES['urunfoto_resimyol']["name"];
+
+	//İmage Resize İşlemleri
+	include('SimpleImage.php');
+	$image = new SimpleImage();
+	$image->load($tmp_name);
+	$image->resize(829,422);
+	$image->save($tmp_name);
+
+	$uploads_dir = '../../dimg/urunfoto';
+	
+	$uniq=uniqid();
+	$refimgyol=substr($uploads_dir, 6)."/".$uniq.".".$ext;
+
+	@move_uploaded_file($tmp_name, "$uploads_dir/$uniq.$ext");
+
 	$urun_seourl=seo($_POST['urun_ad']);
 
 	$kaydet=$db->prepare("INSERT INTO urun SET
 		kategori_id=:kategori_id,
+		urunfoto_resimyol=:urunfoto_resimyol,
 		urun_ad=:urun_ad,
 		urun_detay=:urun_detay,
 		urun_fiyat=:urun_fiyat,
@@ -737,10 +774,11 @@ if (isset($_POST['urunekle'])) {
 		urun_keyword=:urun_keyword,
 		urun_durum=:urun_durum,
 		urun_stok=:urun_stok,
-		urun_seourl=:seourl
+		urun_seourl=:seourl		
 		");
 	$insert=$kaydet->execute(array(
 		'kategori_id' => $_POST['kategori_id'],
+		'urunfoto_resimyol' => $refimgyol,
 		'urun_ad' => $_POST['urun_ad'],
 		'urun_detay' => $_POST['urun_detay'],
 		'urun_fiyat' => $_POST['urun_fiyat'],
@@ -748,7 +786,7 @@ if (isset($_POST['urunekle'])) {
 		'urun_keyword' => $_POST['urun_keyword'],
 		'urun_durum' => $_POST['urun_durum'],
 		'urun_stok' => $_POST['urun_stok'],
-		'seourl' => $urun_seourl
+		'seourl' => $urun_seourl,
 
 	));
 
@@ -770,6 +808,7 @@ if (isset($_POST['urunduzenle'])) {
 
 	$kaydet=$db->prepare("UPDATE urun SET
 		kategori_id=:kategori_id,
+		urunfoto_resimyol=:urunfoto_resimyol,
 		urun_ad=:urun_ad,
 		urun_detay=:urun_detay,
 		urun_fiyat=:urun_fiyat,
@@ -782,6 +821,7 @@ if (isset($_POST['urunduzenle'])) {
 		WHERE urun_id={$_POST['urun_id']}");
 	$update=$kaydet->execute(array(
 		'kategori_id' => $_POST['kategori_id'],
+		'urunfoto_resimyol'=>$refimgyol,
 		'urun_ad' => $_POST['urun_ad'],
 		'urun_detay' => $_POST['urun_detay'],
 		'urun_fiyat' => $_POST['urun_fiyat'],
@@ -791,9 +831,7 @@ if (isset($_POST['urunduzenle'])) {
 		'urun_durum' => $_POST['urun_durum'],
 		'urun_stok' => $_POST['urun_stok'],
 		'seourl' => $urun_seourl
-
 	));
-
 	if ($update) {
 
 		Header("Location:../production/urun-duzenle.php?durum=ok&urun_id=$urun_id");
@@ -1459,13 +1497,26 @@ if (isset($_POST['hedefguncelle'])) {
 
 			Header("Location:../production/hedef-duzenle.php?durum=hata&hedef_id=$urun_id");
 		}
-
-
-
-
 	}
 }
 
+
+if($_POST['durum_begen']) {
+	$begeni=$db->prepare("INSERT INTO begen SET
+		begenenkul_id=:begenenkul_id,
+		durum_id=:durum_id
+	");
+	$insert=$begeni->execute(array(
+		'begenenkul_id' => $_SESSION['userkullanici_id'],
+		'durum_id' => $_POST['durum_id'],
+	));
+
+	if($insert) {
+		echo 'ok';
+	} else {
+		echo 'fail';
+	}
+}
 
 
 ?>
