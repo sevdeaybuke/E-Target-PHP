@@ -800,45 +800,139 @@ if (isset($_POST['urunekle'])) {
 	}
 
 }
+#ürün düzenleme işlemleri
 
 if (isset($_POST['urunduzenle'])) {
 
-	$urun_id=$_POST['urun_id'];
-	$urun_seourl=seo($_POST['urun_ad']);
+	if ($_FILES['urunfoto_resimyol']['size']>0) {
 
-	$kaydet=$db->prepare("UPDATE urun SET
-		kategori_id=:kategori_id,
-		urunfoto_resimyol=:urunfoto_resimyol,
-		urun_ad=:urun_ad,
-		urun_detay=:urun_detay,
-		urun_fiyat=:urun_fiyat,
-		urun_video=:urun_video,
-		urun_onecikar=:urun_onecikar,
-		urun_keyword=:urun_keyword,
-		urun_durum=:urun_durum,
-		urun_stok=:urun_stok,
-		urun_seourl=:seourl
-		WHERE urun_id={$_POST['urun_id']}");
-	$update=$kaydet->execute(array(
-		'kategori_id' => $_POST['kategori_id'],
-		'urunfoto_resimyol'=>$refimgyol,
-		'urun_ad' => $_POST['urun_ad'],
-		'urun_detay' => $_POST['urun_detay'],
-		'urun_fiyat' => $_POST['urun_fiyat'],
-		'urun_video' => $_POST['urun_video'],
-		'urun_onecikar' => $_POST['urun_onecikar'],
-		'urun_keyword' => $_POST['urun_keyword'],
-		'urun_durum' => $_POST['urun_durum'],
-		'urun_stok' => $_POST['urun_stok'],
-		'seourl' => $urun_seourl
-	));
-	if ($update) {
 
-		Header("Location:../production/urun-duzenle.php?durum=ok&urun_id=$urun_id");
+		if ($_FILES['urunfoto_resimyol']['size']>1048576) {
+
+			echo "Bu dosya boyutu çok büyük";
+
+			Header("Location:../production/urun-duzenle.php?durum=dosyabuyuk");
+
+		}
+
+
+		$izinli_uzantilar=array('jpg','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+		$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+
+
+
+		if (in_array($ext, $izinli_uzantilar) === false) {
+			echo "Bu uzantı kabul edilmiyor";
+			Header("Location:../production/urun-duzenle.php?durum=formathata");
+
+			exit;
+		}
+
+		@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+		@$name = $_FILES['urunfoto_resimyol']["name"];
+
+	//İmage Resize İşlemleri
+		include('SimpleImage.php');
+		$image = new SimpleImage();
+		$image->load($tmp_name);
+		$image->resize(829,422);
+		$image->save($tmp_name);
+
+		$uploads_dir = '../../dimg/urunfoto';
+
+
+
+		$uniq=uniqid();
+		$refimgyol=substr($uploads_dir, 6)."/".$uniq.".".$ext;
+
+		@move_uploaded_file($tmp_name, "$uploads_dir/$uniq.$ext");
+
+
+
+
+		$duzenle=$db->prepare("UPDATE urun SET
+
+			kategori_id=:kategori_id,
+			urun_ad=:urun_ad,
+			urun_detay=:urun_detay,
+			urun_fiyat=:urun_fiyat,
+			urunfoto_resimyol=:urunfoto_resimyol
+			WHERE urun_id={$_POST['urun_id']}");
+
+
+		$update=$duzenle->execute(array(
+
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'urun_ad' => htmlspecialchars($_POST['urun_ad']),
+			'urun_detay' => htmlspecialchars($_POST['urun_detay']),
+			'urun_fiyat' => htmlspecialchars($_POST['urun_fiyat']),
+			'urunfoto_resimyol' => $refimgyol
+		));
+
+
+		$urun_id=$_POST['urun_id'];
+
+		if ($update) {
+
+			$resimsilunlink=$_POST['eski_yol'];
+			unlink("../../$resimsilunlink");
+
+
+
+
+			Header("Location:../production/urun-duzenle.php?durum=ok&urun_id=$urun_id");
+
+		} else {
+
+			Header("Location:../production/urun-duzenle.php?durum=hata&urun_id=$urun_id");
+		}
+
 
 	} else {
 
-		Header("Location:../production/urun-duzenle.php?durum=no&urun_id=$urun_id");
+
+//Fotoğraf Yoksa İşlemler
+
+
+		$duzenle=$db->prepare("UPDATE urun SET
+
+			kategori_id=:kategori_id,
+			urun_ad=:urun_ad,
+			urun_detay=:urun_detay,
+			urun_fiyat=:urun_fiyat
+			
+			WHERE urun_id={$_POST['urun_id']}");
+
+
+		$update=$duzenle->execute(array(
+
+			'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+			'urun_ad' => htmlspecialchars($_POST['urun_ad']),
+			'urun_detay' => htmlspecialchars($_POST['urun_detay']),
+			'urun_fiyat' => htmlspecialchars($_POST['urun_fiyat'])
+
+		));
+
+
+		$urun_id=$_POST['urun_id'];
+
+		if ($update) {
+
+			
+			Header("Location:../production/urun-duzenle.php?durum=ok&urun_id=$urun_id");
+
+		} else {
+
+			Header("Location:../production/urun-duzenle.php?durum=hata&urun_id=$urun_id");
+		}
+
+
+
+
 	}
 
 }

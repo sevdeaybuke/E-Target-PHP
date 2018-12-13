@@ -36,6 +36,9 @@
 								<li class="dropdown"><a href="#">Hakkımızda</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right main-menu">
+								<li class="dropdown"><a href="urunler.php">Ürünler</a></li>
+						</ul>						
+						<ul class="nav navbar-nav navbar-right main-menu">
 								<li class="dropdown"><a href="login">Giriş</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right main-menu">

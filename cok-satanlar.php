@@ -6,7 +6,7 @@
                 }
                 ?>
                 <div class="container">
-                    <h2 class="title-default">Gerçekleştirilen Hedefler</h2>  
+                    <h2 class="title-default">Ürünler</h2>  
                 </div>
                 <div class="container=fluid">
                     <div class="fox-carousel dot-control-textPrimary" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-autoplay-timeout="10000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="false" data-r-x-small-dots="true" data-r-x-medium="2" data-r-x-medium-nav="false" data-r-x-medium-dots="true" data-r-small="2" data-r-small-nav="false" data-r-small-dots="true" data-r-medium="3" data-r-medium-nav="false" data-r-medium-dots="true" data-r-large="4" data-r-large-nav="false" data-r-large-dots="true">
