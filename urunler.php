@@ -15,8 +15,6 @@ require_once 'header.php';
 
 
                     <input class="form-control" required="" minlength="3" name="searchkeyword" placeholder="Ne aramıştınız . . ." type="text">
-
-
                     <span class="input-group-addon">
                         <button type="submit" name="searchsayfa">
                             <span class="glyphicon glyphicon-search"></span>
