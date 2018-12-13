@@ -74,7 +74,8 @@ require_once 'header.php';
                                         $limit = ($sayfa - 1) * $sayfada;
 
                                         //tüm tablo sütunlarının çekilmesi
-                                        $urunsor=$db->prepare("SELECT urun.*,kategori.*,kullanici.* FROM urun INNER JOIN kategori ON urun.kategori_id=kategori.kategori_id INNER JOIN kullanici ON urun.kullanici_id=kullanici.kullanici_id WHERE urun_durum=:urun_durum and kategori.kategori_id=:kategori_id order by urun_zaman DESC limit $limit,$sayfada");
+                                        $urunsor=$db->prepare("SELECT urun.*,kategori.* FROM urun INNER JOIN kategori ON urun.kategori_id=kategori.kategori_id 
+                                        WHERE urun_durum=:urun_durum and kategori.kategori_id=:kategori_id order by urun_zaman DESC limit $limit,$sayfada");
                                         $urunsor->execute(array(
                                             'urun_durum' => 1,
                                             'kategori_id' => $_GET['kategori_id']
@@ -145,28 +146,7 @@ require_once 'header.php';
                                                     <div class="sale-qty">Satış ( 0 )</div>
                                                 </div>
                                             </div>
-                                            <div class="item-profile">
-                                                <div class="profile-title">
-                                                    <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                                    <span><?php echo $uruncek['kullanici_ad']." ".substr($uruncek['kullanici_soyad'],0,1) ?>.</span>
-                                                </div>
-                                                <div class="profile-rating-info">
-                                                    <ul>
-                                                        <li>
-                                                            <ul class="profile-rating">
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li>(<span> 05</span> )</li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><i class="fa fa-comment-o" aria-hidden="true"></i>( 10 )</li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
 
