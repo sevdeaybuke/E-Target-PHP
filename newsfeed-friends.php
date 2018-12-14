@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<!-- Stylesheets
-    ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/ionicons.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <!--Google Webfont-->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-	</head>
-  <?php
+<?php
 ob_start();
 session_start();
 date_default_timezone_set('Europe/Istanbul');
@@ -38,13 +23,31 @@ if (isset($_SESSION['userkullanici_mail'])) {
      $_SESSION['userkullanici_id']=$kullanicicek['kullanici_id'];
  }
 
-
-
 }
 
 
 ?>
   
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!--Google Webfont-->
+		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
+	</head>
   <body>
 
     <!-- Header
@@ -92,7 +95,6 @@ if (isset($_SESSION['userkullanici_mail'])) {
             <div class="profile-card">
             	<img src="<?php echo $kullanicicek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo" />
             	<h5><a href="timeline.html" class="text-white"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a></h5>
-            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Benim Zaman Tünelim</a></div></li>
@@ -150,7 +152,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             <!-- Friend List
             ================================================= -->
             <?php 
-                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto FROM kullanici limit 7");
+                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto, kullanici_id FROM kullanici limit 7");
                     $cekFollow->execute();
                     while($kullaniclariCek=$cekFollow->fetch(PDO::FETCH_ASSOC)) { ?>
                     <div class="friend-list">
@@ -161,9 +163,24 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     <div class="card-info">
                     <img src="<?php echo $kullaniclariCek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-lg"/>
                     <div class="friend-info">
+                    <a href="timeline.html" class="profile-link"><?php echo $kullaniclariCek['kullanici_ad']." ".($kullaniclariCek['kullanici_soyad']) ?></a></h5>
                     <a href="#" class="pull-right text-green">| Profilini Görüntüle</a>
-                    <a href="mesaj-gonder.php" class="pull-right text-green"> | Mesaj Gönder</a>
-                    <?php echo $kullaniclariCek['kullanici_ad']." ".$kullaniclariCek['kullanici_soyad'] ?>
+                    <?php 
+                      if (empty($_SESSION['userkullanici_id'])) {?>
+
+                      <li><a href="login" class="buy-now-btn" id="buy-button"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mesaj Gönder</a></li>
+
+                      <?php }
+
+                      else if ($_SESSION['userkullanici_id']==$kullaniclariCek['kullanici_id']) {?>
+
+                      <li><button disabled=""  class="buy-now-btn" id="buy-button"><i class="fa fa-ban" aria-hidden="true"></i> Mesaj Gönder</button></li>
+
+                      <?php } else {?>
+
+                      <li><a href="mesaj-gonder?kullanici_gel=<?php echo $kullaniclariCek['kullanici_id'] ?>" class="buy-now-btn" id="buy-button"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mesaj Gönder</a></li>
+
+                      <?php } ?>
                       </div>
                       </div>
                     </div>

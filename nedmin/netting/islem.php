@@ -766,6 +766,7 @@ if (isset($_POST['urunekle'])) {
 
 	$kaydet=$db->prepare("INSERT INTO urun SET
 		kategori_id=:kategori_id,
+		kullanici_id=:kullanici_id,
 		urunfoto_resimyol=:urunfoto_resimyol,
 		urun_ad=:urun_ad,
 		urun_detay=:urun_detay,
@@ -778,6 +779,7 @@ if (isset($_POST['urunekle'])) {
 		");
 	$insert=$kaydet->execute(array(
 		'kategori_id' => $_POST['kategori_id'],
+		'kullanici_id' => 171,
 		'urunfoto_resimyol' => $refimgyol,
 		'urun_ad' => $_POST['urun_ad'],
 		'urun_detay' => $_POST['urun_detay'],

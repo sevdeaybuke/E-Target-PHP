@@ -219,7 +219,7 @@ if ($ayarcek['ayar_bakim']==1) {
                                         <?php 
 
                                         if (isset($_SESSION['userkullanici_mail'])) {?>
-
+                                        <!--
                                         <li>
                                             <div class="notify-notification">
                                                 <a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i><span>8</span></a>
@@ -275,7 +275,7 @@ if ($ayarcek['ayar_bakim']==1) {
 
                                                 </ul>
                                             </div>
-                                        </li>
+                                        </li>-->
                                         <li>
                                             <div class="notify-message">
                                                 <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>
