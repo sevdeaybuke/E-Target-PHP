@@ -152,7 +152,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             <!-- Friend List
             ================================================= -->
             <?php 
-                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto, kullanici_id FROM kullanici limit 7");
+                    $cekFollow=$db->prepare("SELECT kullanici_ad,kullanici_soyad,kullanici_magazafoto, kullanici_id FROM kullanici");
                     $cekFollow->execute();
                     while($kullaniclariCek=$cekFollow->fetch(PDO::FETCH_ASSOC)) { ?>
                     <div class="friend-list">

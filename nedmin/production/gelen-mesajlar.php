@@ -59,7 +59,7 @@ islemkontrol();
 
                   <?php 
 
-                   $mesajsor=$db->prepare("SELECT mesaj.*,kullanici.* FROM mesaj INNER JOIN kullanici ON mesaj.kullanici_gon=kullanici.kullanici_id where mesaj.kullanici_gel=:id order by mesaj_okunma,mesaj_zaman DESC");
+                   $mesajsor=$db->prepare("SELECT mesaj.*,kullanici.* FROM mesaj INNER JOIN kullanici ON mesaj.kullanici_gon=kullanici.kullanici_id where mesaj.kullanici_gel=171 order by mesaj_okunma,mesaj_zaman DESC");
                   $mesajsor->execute(array(
 
                     'id' => $_SESSION['userkullanici_id']
