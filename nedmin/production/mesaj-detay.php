@@ -2,8 +2,6 @@
 
 include 'header.php'; 
 
-islemkontrol();
-
 $mesajsor=$db->prepare("SELECT mesaj.*,kullanici.* FROM mesaj INNER JOIN kullanici ON mesaj.kullanici_gon=kullanici.kullanici_id where kullanici.kullanici_id=:id and mesaj.mesaj_id=:mesaj_id order by mesaj_zaman DESC");
 $mesajsor->execute(array(
   'id' => $_GET['kullanici_gon'],
