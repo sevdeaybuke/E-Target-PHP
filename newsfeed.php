@@ -101,6 +101,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="ion-ios-briefcase"></i><div><a href="hedefbasvuru.php">Hedef Belirle</a></div></li>
+              <li><i class="ion-ios-briefcase"></i><div><a href="timeline.php?kullanici_id=<?php echo $kullanicicek['kullanici_id'] ?>">İnsanların Hedeflleri</a></div></li>
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.php">Benim Zaman Tünelim</a></div></li>
               <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">İnsanların Zaman Tüneli</a></div></li>
               <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.php">Üyeler</a></div></li>
