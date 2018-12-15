@@ -112,7 +112,7 @@ if (isset($_GET['kullanici_id'])) {
                   $say=$coinsor->rowCount();
                   $coincek=$coinsor->fetch(PDO::FETCH_ASSOC);
                   ?>
-                  <p class="text-muted"><b><?php echo ($coincek['hedef_fiyat']==0) ? '0': $coincek['hedef_fiyat']; ?></b>&nbsp;Coin Sayısı</p>
+                  <p class="text-muted"><b><?php echo ($coincek['hedef_fiyat']==0) ? '0': $coincek['hedef_fiyat']; ?></b>&nbsp;<i class="fa fa-bitcoin"></i></p>
                 </div>
               </div>
               <div class="col-md-9">
@@ -139,6 +139,8 @@ if (isset($_GET['kullanici_id'])) {
                 </div>
               </div><!-- Post Create Box End-->
 
+              <!-- Post content içerisine db deki tüm hedefler çekilecek -->    
+     
               <!-- Post Content
               ================================================= -->
               <div class="post-content">
@@ -182,90 +184,6 @@ if (isset($_GET['kullanici_id'])) {
                 </div>
               </div>
 
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/22/2016</p>
-                </div><!--Post Date End-->
-
-                <img src="images/post-images/13.jpg" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Yesterday</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/21/2016</p>
-                </div><!--Post Date End-->
-
-                <div class="post-container">
-                  <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">2 days ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
 
             </div>
             <div class="col-md-2 static">
@@ -294,67 +212,18 @@ if (isset($_GET['kullanici_id'])) {
       </div>
     </div>
 
-    <!-- Footer
+      <!-- Footer
     ================================================= -->
     <footer id="footer">
       <div class="container">
       	<div class="row">
           <div class="footer-wrapper">
-            <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
-              <ul class="list-inline social-icons">
-              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>For individuals</h6>
-              <ul class="footer-links">
-                <li><a href="">Signup</a></li>
-                <li><a href="">login</a></li>
-                <li><a href="">Explore</a></li>
-                <li><a href="">Finder app</a></li>
-                <li><a href="">Features</a></li>
-                <li><a href="">Language settings</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>For businesses</h6>
-              <ul class="footer-links">
-                <li><a href="">Business signup</a></li>
-                <li><a href="">Business login</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Advertise</a></li>
-                <li><a href="">Setup</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>About</h6>
-              <ul class="footer-links">
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-              <h6>Contact Us</h6>
-                <ul class="contact">
-                	<li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                	<li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                  <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
-                </ul>
-            </div>
+             
           </div>
       	</div>
       </div>
       <div class="copyright">
-        <p>Thunder Team © 2016. All rights reserved</p>
+        <p>E-Target</p>
       </div>
 		</footer>
     
@@ -362,6 +231,8 @@ if (isset($_GET['kullanici_id'])) {
     <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div>
+    
+  
 
     <!-- Scripts
     ================================================= -->

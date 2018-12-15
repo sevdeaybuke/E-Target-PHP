@@ -362,7 +362,7 @@ if ($ayarcek['ayar_bakim']==1) {
                                                     <div class="user-account-balance">
 
                                                         <?php 
-                                                        $siparissor=$db->prepare("SELECT SUM(urun_fiyat) as toplam FROM siparis_detay where kullanici_idsatici=:kullanici_id ");
+                                                        $siparissor=$db->prepare("SELECT SUM(hedef_fiyat) as toplam FROM hedef where kullanici_id=:kullanici_id ");
 
                                                         $siparissor->execute(array(
                                                             'kullanici_id' => $_SESSION['userkullanici_id']
@@ -371,8 +371,8 @@ if ($ayarcek['ayar_bakim']==1) {
                                                         $sipariscek=$siparissor->fetch(PDO::FETCH_ASSOC);
 
                                                         if (isset($sipariscek['toplam'])) {
-                                                            echo $sipariscek['toplam']." TL";
-
+                                                            echo $sipariscek['toplam']." ";?><i class="fa fa-bitcoin"></i>
+                                                        <?php
                                                         } else {
 
                                                             echo "0.00 TL";
