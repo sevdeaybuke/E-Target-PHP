@@ -1629,14 +1629,51 @@ if (isset($_POST['basariekle'])) {
 	));
 	if ($insert) {
 
-		Header("Location:../production/basarisozler.php?durum=ok");
+		Header("Location:../production/basarisozleri.php?durum=ok");
 
 	} else {
 
-		Header("Location:../production/basarisozler.php?durum=no");
+		Header("Location:../production/basarisozleri.php?durum=no");
 	}
 
 }
 
+#başarı sözü düzenleme
+
+if (isset($_POST['basariduzenle'])) {
+
+	$duzenle=$db->prepare("UPDATE basarisozleri SET
+		basari_sozleri=:basari_sozleri
+		WHERE id=:id");
+
+	$update=$duzenle->execute(array(
+		'basari_sozleri' => htmlspecialchars(strip_tags($_POST['basari_sozleri'])),
+		'id' => $_GET['id']
+	));
+
+
+	$urun_id=$_GET['id'];
+	if ($update) {
+		Header("Location:../production/basarisozleri-duzenle.php?durum=ok&id={$urun_id}");
+	} else {
+		Header("Location:../production/basarisozleri-duzenle.php?durum=hata&id={$urun_id}");
+	}
+
+}
+if ($_GET['basarisozusil']=="ok") {
+
+	$sil=$db->prepare("DELETE from basarisozleri where id=:id ");
+	$kontrol=$sil->execute(array(
+		'id' => $_GET['id']
+	));
+
+	$urun_id=$_GET['id'];
+	if ($kontrol) {
+		Header("Location:../production/basarisozleri.php?durum=ok&id={$urun_id}");
+	} else {
+		Header("Location:../production/basarisozleri.php?durum=no&id={$urun_id}");
+	}
+
+}
 
 ?>

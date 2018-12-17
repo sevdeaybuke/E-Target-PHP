@@ -46,7 +46,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
             <br />
 
             <!-- / => en kök dizine çık ... ../ bir üst dizine çık -->
-            <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <form action="../netting/islem.php?id=<?php echo $_GET['id']; ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 
               <!-- Ck Editör Başlangıç -->
@@ -56,7 +56,7 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
 
-                    <textarea  class="ckeditor" id="editor1" name="urun_detay"><?php echo $uruncek['basari_sozleri']; ?></textarea>
+                    <textarea  class="ckeditor" id="editor1" name="basari_sozleri"><?php echo $uruncek['basari_sozleri']; ?></textarea>
                   </div>
                 </div>
 

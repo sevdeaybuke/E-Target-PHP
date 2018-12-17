@@ -71,7 +71,7 @@ $urunsor->execute();
                  <td><?php echo $uruncek['basari_sozleri'] ?></td>
 
             <td><center><a href="basarisozleri-duzenle.php?id=<?php echo $uruncek['id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
-            <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize eminmisiniz?')" href="../netting/islem.php?urun_id=<?php echo $uruncek['id']; ?>&basarisozusil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+            <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize eminmisiniz?')" href="../netting/islem.php?id=<?php echo $uruncek['id']; ?>&basarisozusil=ok"><button  class="btn btn-danger btn-xs" name="basarisozusil">Sil</button></a></center></td>
           </tr>
 
 
