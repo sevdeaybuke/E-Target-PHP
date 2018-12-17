@@ -34,10 +34,7 @@ if (isset($_GET['kullanici_id'])) {
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>Hedefler</title>
+
 
     <!-- Stylesheets
     ================================================= -->
@@ -45,13 +42,12 @@ if (isset($_GET['kullanici_id'])) {
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link href="css/emoji.css" rel="stylesheet">
     <!--Google Webfont-->
 		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-    <!--Favicon-->
 	</head>
   <body>
 
+  
     <!-- Header
     ================================================= -->
 		<header id="header">
@@ -96,6 +92,7 @@ if (isset($_GET['kullanici_id'])) {
       <div class="timeline">
         <div class="timeline-cover">
 
+
           <!--Timeline Menu for Large Screens-->
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <div class="row">
@@ -119,7 +116,7 @@ if (isset($_GET['kullanici_id'])) {
                 <ul class="list-inline profile-menu">
                   <li><a href="timeline.html" class="active">Anasayfa</a></li>
                   <li><a href="hedeflerim.php" >Benim Hedeflerim</a></li>
-                  <li><a href="timeline-about.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Hakkıımda</a></li>
+                  <li><a href="timeline-about.php">Hakkıımda</a></li>
                   <li><a href="timeline-album.html">Sepetim</a></li>
                 </ul>
               </div>
@@ -132,49 +129,63 @@ if (isset($_GET['kullanici_id'])) {
             <div class="col-md-3"></div>
             <div class="col-md-7">
 
-              <!-- Post Create Box
+              <!-- About
               ================================================= -->
-              <div class="create-post">
-                <div class="row">
-
+              <div class="about-profile">
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i><?php echo $kullanicicek['kullanici_ad']?> Bilgileri</h4>
+                  <p>Hayallerinin peşinden koşmayı asla bırakmayan bir insan...</p>
                 </div>
-              </div><!-- Post Create Box End-->
-
-              <!-- Post content içerisine db deki tüm hedefler çekilecek -->    
-              <?php
-                $hedefsor=$db->prepare("SELECT *,kullanici_ad as kullanici_ad,kullanici_magazafoto as kullanici_magazafoto FROM hedef  as h INNER JOIN kullanici as k
-                on h.kullanici_id=k.kullanici_id order by hedef_zaman DESC");
-                $hedefsor->execute();
-                $say=0;
-
-                while($hedefcek=$hedefsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
-                <div class="post-content">
-                    <!--Post Date-->
-                    <div class="post-date hidden-xs hidden-sm">
-                    <h5><?php echo $hedefcek['kullanici_ad']; ?><!--Kullanıcı adları çekilecek--></h5>
-                    <p class="text-grey"><?php echo $hedefcek['hedef_zaman']; ?></p>
-                    </div><!--Post Date End-->
-                    
-                <img src="<?php echo $hedefcek['urunfoto_resimyol']; ?>" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="<?php echo $hedefcek['kullanici_magazafoto']; ?>" alt="user" class="profile-photo-md pull-left" />
-                  <div style="margin-left:80px;"><p><b><u>Hedef:</u> <?php echo $hedefcek['hedef_ad']; ?></p></div>
-                  <div class="post-detail">
-                    
-                    <div class="post-comment">
-                      <!--<img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-                      <input type="text" class="form-control" placeholder="Yorum Gönder">
-                      &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="float:right;height:38px;">Gönder</button>
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Hesap Bilgileri</h4>
+                  <div class="organization">
+                    <img src="images/envato.png" alt="" class="pull-left img-org" />
+                    <div class="work-info">
+                      <h5>Kullanıcı Adı</h5>
+                      <p><span class="text-grey" style="text-transform: uppercase;"><?php echo $kullanicicek['kullanici_ad'] ?></span></p>
+                    </div>
+                  </div>
+                  <div class="organization">
+                    <img src="images/envato.png" alt="" class="pull-left img-org" />
+                    <div class="work-info">
+                      <h5>Kullanıcı Soyadı</h5>
+                      <p><span class="text-grey" style="text-transform: uppercase;"><?php echo $kullanicicek['kullanici_soyad'] ?></span></p>
+                    </div>
+                  </div>
+                  <div class="organization">
+                    <img src="images/envato.png" alt="" class="pull-left img-org" />
+                    <div class="work-info">
+                      <h5>Telefon</h5>
+                      <p><span class="text-grey"><?php echo $kullanicicek['kullanici_gsm']; ?></span></p>
                     </div>
                   </div>
                 </div>
+                <!--
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
+                  <p>228 Park Eve, New York</p>
+                  <div class="google-maps">
+                    <div id="map" class="map"></div>
+                  </div>
                 </div>
-                <?php } ?>
-              <!-- Post Content
-              ================================================= -->
-
-
-
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
+                  <ul class="interests list-inline">
+                    <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
+                    <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>
+                    <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>
+                    <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>
+                    <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>
+                  </ul>
+                </div>
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Language</h4>
+                    <ul>
+                      <li><a href="">Russian</a></li>
+                      <li><a href="">English</a></li>
+                    </ul>
+                </div>-->
+              </div>
             </div>
             <div class="col-md-2 static">
               <div id="sticky-sidebar">
@@ -202,7 +213,9 @@ if (isset($_GET['kullanici_id'])) {
       </div>
     </div>
 
-      <!-- Footer
+
+
+        <!-- Footer
     ================================================= -->
     <footer id="footer">
       <div class="container">
@@ -221,16 +234,15 @@ if (isset($_GET['kullanici_id'])) {
     <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div>
-    
-  
 
     <!-- Scripts
     ================================================= -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.sticky-kit.min.js"></script>
     <script src="js/jquery.scrollbar.min.js"></script>
     <script src="js/script.js"></script>
-
+    
   </body>
 </html>
