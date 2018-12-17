@@ -70,7 +70,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown"><a href="cekilis.php">Çekiliş</a></li>
+              <li class="dropdown"><a href="cekilis.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Çekiliş</a></li>
               <li class="dropdown"><a href="timeline.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Genel Hedefler</a></li>
               <li class="dropdown"><a href="urunler.php">Ürünler</a></li>
               <li class="dropdown"><a href="hesabim.php">Hesabım</a></li>

@@ -1676,4 +1676,36 @@ if ($_GET['basarisozusil']=="ok") {
 
 }
 
+#Çekilişe katıl
+if (isset($_POST['cekilisekatil'])) {
+
+	$kaydet=$db->prepare("INSERT INTO cekilis SET
+		kullanici_id=:kullanici_id
+		");
+	$insert=$kaydet->execute(array(
+		'kullanici_id' => $_GET['kullanici_id']
+	));
+	$urun_id=$_GET['kullanici_id'];
+	$idsor=$db->prepare("SELECT kullanici_id as kullanici_id from cekilis where kullanici_id=:kullanici_id");
+	$idsor->execute(array(
+		'kullanici_id' =>$_GET['kullanici_id']
+	));
+	$islem=$idsor->fetch();
+	if($islem==0){
+		if ($insert) {
+
+			Header("Location:../../cekilis.php?durum=ok&kullanici_id={$urun_id}");
+
+		}else{
+			Header("Location:../../cekilis.php?durum=no&kullanici_id={$urun_id}");
+			echo "Birden fazla katılamazsın";
+		}
+	} else
+
+		Header("Location:../../cekilis.php?durum=no&kullanici_id={$urun_id}");
+
+	}
+
+
+
 ?>
