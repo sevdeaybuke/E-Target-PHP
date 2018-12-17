@@ -64,7 +64,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index"><img src="img/target.png" style="width:35px" alt="logo" /></a>
+            <a class="navbar-brand" href="newsfeed"><img src="img/target.png" style="width:35px" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,6 +97,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
             	<h5><a href="timeline.html" class="text-white"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'], 0,1) ?>.</a></h5>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
+              <li class="dropdown"><a href="cekilis.php">Çekiliş</a></li>
                <li><i class="ion-ios-briefcase"></i><div><a href="timeline.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']?>">Genel Hedefler</a></div></li>
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.php">Benim Zaman Tünelim</a></div></li>
               <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.php">Üyeler</a></div></li>

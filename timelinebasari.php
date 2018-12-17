@@ -66,12 +66,13 @@ if (isset($_GET['kullanici_id'])) {
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index"><img src="img/target.png" style="width:35px" alt="logo" /></a>
+            <a class="navbar-brand" href="newsfeed"><img src="img/target.png" style="width:35px" alt="logo" /></a>
           </div>
 
          <!-- Collect the nav links, forms, and other content for toggling -->
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
+            <li class="dropdown"><a href="timeline.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Genel Hedefler</a></li>
               <li class="dropdown"><a href="hedefler.php">Genel Hedefler</a></li>
               <li class="dropdown"><a href="urunler.php">Ürünler</a></li>
               <li class="dropdown"><a href="hesabim.php">Hesabım</a></li>
