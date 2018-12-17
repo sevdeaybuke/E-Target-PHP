@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 12 Ara 2018, 09:35:33
+-- Üretim Zamanı: 17 Ara 2018, 15:07:42
 -- Sunucu sürümü: 10.1.36-MariaDB
 -- PHP Sürümü: 7.2.10
 
@@ -92,15 +92,53 @@ INSERT INTO `banka` (`banka_id`, `banka_ad`, `banka_iban`, `banka_hesapadsoyad`,
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `basarisozleri`
+--
+
+CREATE TABLE `basarisozleri` (
+  `id` int(11) NOT NULL,
+  `kullanici_id` int(11) NOT NULL,
+  `basari_sozleri` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `begen`
 --
 
 CREATE TABLE `begen` (
   `begenmeid` int(11) NOT NULL,
-  `begenilenkul_id` int(11) NOT NULL,
   `begenenkul_id` int(11) NOT NULL,
-  `durum_id` enum('0','1') NOT NULL
+  `durum_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `begen`
+--
+
+INSERT INTO `begen` (`begenmeid`, `begenenkul_id`, `durum_id`) VALUES
+(1, 153, 19),
+(2, 166, 19),
+(3, 172, 19),
+(4, 172, 10000),
+(5, 172, 10000),
+(6, 172, 19),
+(7, 172, 19),
+(8, 172, 19),
+(9, 172, 19),
+(10, 172, 19),
+(11, 172, 19),
+(12, 172, 19),
+(13, 172, 12),
+(14, 172, 11),
+(15, 172, 12),
+(16, 172, 12),
+(17, 172, 12),
+(18, 172, 12),
+(19, 183, 20),
+(20, 172, 19),
+(21, 174, 15);
 
 -- --------------------------------------------------------
 
@@ -139,7 +177,9 @@ INSERT INTO `durum` (`durum_id`, `kullanici_id`, `durum`, `zaman`, `resim`) VALU
 (16, 175, 'Herkese Selam', '2018-12-09 23:16:00', ''),
 (17, 177, 'burada ilk günüm\r\n', '2018-12-10 23:05:12', ''),
 (18, 180, 'gggg', '2018-12-11 02:33:52', ''),
-(19, 172, 'ksjdhfkjshd hksdjh fkdshjkdsh sdhkjdsh ', '2018-12-11 16:23:19', '');
+(19, 172, 'ksjdhfkjshd hksdjh fkdshjkdsh sdhkjdsh ', '2018-12-11 16:23:19', ''),
+(20, 183, 'deneme', '2018-12-12 18:59:03', ''),
+(21, 172, 'gfdfd', '2018-12-15 01:41:41', '');
 
 -- --------------------------------------------------------
 
@@ -199,7 +239,8 @@ INSERT INTO `hedef` (`hedef_id`, `kullanici_id`, `kategori_id`, `hedef_zaman`, `
 (5, 177, 19, '2018-12-10 20:08:04', 'dimg/urunfoto/5c0ec7a4d2866.jpg', 'İstanbula gidicem', '', '&lt;p&gt;istanbul&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0'),
 (6, 172, 19, '2018-12-10 21:04:11', 'dimg/urunfoto/5c0ed4cb13014.jpg', 'cdsfds', '', '&lt;p&gt;sdfdsd87u&lt;/p&gt;', 10.00, 0, '', '', 0, '1', '1'),
 (7, 180, 19, '2018-12-10 23:34:51', 'dimg/urunfoto/5c0ef81b5e727.jpg', 'fgdhfghfd', '', '&lt;p&gt;fgdhfdhfgfhdsadasdsasa&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0'),
-(8, 181, 19, '2018-12-11 13:25:52', 'dimg/urunfoto/5c0fbae031190.jpg', 'kedi', '', '&lt;p&gt;fa dfsdfafe fs&amp;nbsp;&lt;/p&gt;', 0.00, 0, '', '', 0, '1', '1');
+(8, 181, 19, '2018-12-11 13:25:52', 'dimg/urunfoto/5c0fbae031190.jpg', 'kedi', '', '&lt;p&gt;fa dfsdfafe fs&amp;nbsp;&lt;/p&gt;', 0.00, 0, '', '', 0, '1', '1'),
+(9, 183, 16, '2018-12-12 16:02:33', 'dimg/urunfoto/5c113119a6a74.jpg', 'kedi', '', '', 10.00, 0, '', '', 0, '1', '0');
 
 -- --------------------------------------------------------
 
@@ -287,22 +328,25 @@ CREATE TABLE `kullanici` (
 
 INSERT INTO `kullanici` (`kullanici_id`, `subMerchantKey`, `kullanici_magaza`, `kullanici_magazafoto`, `kullanici_zaman`, `kullanici_sonzaman`, `kullanici_resim`, `kullanici_tc`, `kullanici_banka`, `kullanici_iban`, `kullanici_ad`, `kullanici_soyad`, `kullanici_mail`, `kullanici_gsm`, `kullanici_password`, `kullanici_adres`, `kullanici_il`, `kullanici_ilce`, `kullanici_unvan`, `kullanici_tip`, `kullanici_vdaire`, `kullanici_vno`, `kullanici_yetki`, `kullanici_durum`) VALUES
 (153, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-07-31 11:31:57', '0000-00-00 00:00:00', '', '', '', NULL, 'Emrah', 'Yüksel', 'info@emrahyuksel.com.tr', '', '123456', 's1', 'İstanbul', 'Çatalca', 'sdf', 'PERSONAL', 'sdf', 'sdf', '5', 1),
-(166, '', '2', 'dimg/test/5a2b97af021ac.jpg', '2017-12-08 21:51:51', '2017-12-09 23:03:57', '', '12345678910', 'Garantia', 'TR121312', 'Emrah', 'Yüksel', 'satici@emrahyuksel.com.tr', '08508408076', '123456', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
+(166, '', '0', 'dimg/test/5a2b97af021ac.jpg', '2017-12-08 21:51:51', '2017-12-09 23:03:57', '', '12345678910', 'Garantia', 'TR121312', 'Emrah', 'Yüksel', 'satici@emrahyuksel.com.tr', '08508408076', '123456', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (168, '', '0', 'dimg/test/5a2988bb8a36d.jpg', '2017-12-02 16:18:40', '2017-12-10 12:26:32', '', '12345678910', 'Garantia', 'TR121312', 'Naci', 'Yüksel', 'alici@emrahyuksel.com.tr', '08508408076', 'dc483e80a7a0bd9ef71d8cf973673924', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (169, '', '0', 'dimg/test/5a2bbf7b7a385.jpg', '2017-12-09 12:45:24', '0000-00-00 00:00:00', '', '', '', NULL, 'Ahmet', 'Korkmaz', 'alici1@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (170, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-12-09 15:51:51', '0000-00-00 00:00:00', '', '', '', NULL, 'Murat', 'Sönmez', 'alici2@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
-(171, '', '0', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-06 13:16:28', '0000-00-00 00:00:00', '', '', '', NULL, 'Sevde Aybüke', 'Kaleli', 'sevdeaybuke@gmail.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '5', 1),
-(172, '', '2', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-11 19:11:52', '', '765476', 'uytuyyu', '7657656467', 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', 'dfgsfs', 'asfdsa', 'asdsa', '', 'PERSONAL', '', '', '1', 1),
+(171, '', '2', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-06 13:16:28', '0000-00-00 00:00:00', '', '', '', NULL, 'Sevde Aybüke', 'Kaleli', 'sevdeaybuke@gmail.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '5', 1),
+(172, '', '1', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-17 03:44:09', '', '765476', 'uytuyyu', '7657656467', 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', 'dfgsfs', 'asfdsa', 'asdsa', '', 'PERSONAL', '', '', '1', 1),
 (173, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 01:09:22', '0000-00-00 00:00:00', '', '', '', NULL, 'deneme', 'deneme', 'd', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
-(174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-09 00:39:14', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
+(174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-14 02:19:47', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (175, '', '2', 'dimg/test/5c0d778c1ce13.png', '2018-12-09 23:09:52', '2018-12-10 00:28:37', '', '21231321321', 'ds', '131241242', 'deneme', 'deneme', 'deneme', '454545', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'asdas', '', 'PERSONAL', '', '', '1', 1),
 (176, '', '2', 'dimg/test/5c0d891ff3e08.jpg', '2018-12-10 00:28:17', '0000-00-00 00:00:00', '', '4545456', 'asdas', '2343242343', 'a', 'a', 'a', '455454', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'a', '', 'PERSONAL', '', '', '1', 1),
 (177, '', '2', 'dimg/test/5c0ec6d553c9d.jpg', '2018-12-10 23:04:12', '2018-12-10 23:27:31', '', '2132132', '21321', '231221', 'tugba', 'kaleli', 'tugba@gmail.com', '21321', 'e10adc3949ba59abbe56e057f20f883e', '12321', '12321', '123', '', 'PERSONAL', '', '', '1', 1),
 (178, '', '2', 'dimg/magaza-fotoyok.png', '2018-12-10 23:25:30', '2018-12-11 00:05:38', '', '324', 'sadsa', '231221', 'c', 'c', 'c@c.om', '32432', 'e10adc3949ba59abbe56e057f20f883e', 'dsfds', 'sdfs', 'sdfds', '', 'PERSONAL', '', '', '1', 1),
 (179, '', '2', 'dimg/magaza-fotoyok.png', '2018-12-10 23:28:20', '2018-12-10 23:42:28', '', '23423432', 'sadsa', '34e32432432433', 's', 's', 's@s.com', '324324323', 'e10adc3949ba59abbe56e057f20f883e', 'sadas', 'sadsa', 'asdas', '', 'PERSONAL', '', '', '1', 1),
 (180, '', '2', 'dimg/test/5c0ef7d19dfc3.jpg', '2018-12-11 02:33:05', '0000-00-00 00:00:00', '', '45654654', '21321', '4565465465654', 'j', 'j', 'j@j.com', '45645654', 'e10adc3949ba59abbe56e057f20f883e', 'fgdfgf', 'dfdf', 'dfg', '', 'PERSONAL', '', '', '1', 1),
-(181, '', '2', 'dimg/test/5c0fba9f20559.jpg', '2018-12-11 16:24:29', '0000-00-00 00:00:00', '', '43243324423', 'sdafasd', '3243242342323', 'emre', 'emre', 'emre@e.com', '32423432', 'e10adc3949ba59abbe56e057f20f883e', 'sdasdf', 'dsfas', 'dsafas', '', 'PERSONAL', '', '', '1', 1),
-(182, '', '0', 'dimg/magaza-fotoyok.png', '2018-12-12 02:43:00', '0000-00-00 00:00:00', '', '', '', NULL, 'v', 'v', 'v@v.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1);
+(181, '', '0', 'dimg/test/5c0fba9f20559.jpg', '2018-12-11 16:24:29', '0000-00-00 00:00:00', '', '43243324423', 'sdafasd', '3243242342323', 'emre', 'emre', 'emre@e.com', '32423432', 'e10adc3949ba59abbe56e057f20f883e', 'sdasdf', 'dsfas', 'dsafas', '', 'PERSONAL', '', '', '1', 1),
+(182, '', '0', 'dimg/magaza-fotoyok.png', '2018-12-12 02:43:00', '0000-00-00 00:00:00', '', '', '', NULL, 'v', 'v', 'v@v.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
+(183, '', '0', 'dimg/test/5c11303aa9cc7.jpg', '2018-12-12 18:58:12', '0000-00-00 00:00:00', '', '21312321312', '2423432', '32423432', 'kamil', 'kamil', 'kamil@kamil.com', '432423', 'e10adc3949ba59abbe56e057f20f883e', 'sfdsddfsddsf', 'fdsfsdfds', 'dsfds', '', 'PERSONAL', '', '', '1', 1),
+(184, '', '0', 'dimg/magaza-fotoyok.png', '2018-12-15 01:41:06', '0000-00-00 00:00:00', '', '', '', NULL, 'i', 'i', 'i@i.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
+(185, '', '0', 'dimg/test/5c1799a9da7ea.jpg', '2018-12-17 15:41:44', '0000-00-00 00:00:00', '', '', '', NULL, 'deneme', 'deneme', 'deneme@deneme.com', '055555', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -365,7 +409,20 @@ INSERT INTO `mesaj` (`mesaj_id`, `mesaj_zaman`, `mesaj_detay`, `kullanici_gel`, 
 (44, '2017-12-09 11:16:26', '<p>bildirim kontrol araya gir</p>', 166, 168, '1'),
 (45, '2017-12-09 19:37:06', '<p>asdasdasd</p>', 169, 166, '0'),
 (46, '2017-12-09 19:37:25', '<p>rtytry</p>', 169, 166, '0'),
-(47, '2018-12-08 11:40:16', '<p>sadasda</p>', 166, 172, '1');
+(47, '2018-12-08 11:40:16', '<p>sadasda</p>', 166, 172, '1'),
+(48, '2018-12-13 14:57:19', '<p>cvzxcxzczx</p>', 172, 174, '1'),
+(49, '2018-12-13 14:57:54', '<p>fff</p>', 174, 172, '1'),
+(50, '2018-12-14 21:05:06', '<p>merhabalar sevde hanım sorular hakkında bilgi alabilir miyimn ?&nbsp;</p>', 171, 172, '1'),
+(51, '2018-12-14 21:37:59', '<p>dsfdsfds</p>', 171, 172, '1'),
+(52, '2018-12-14 21:40:46', '<p>naber</p>', 183, 172, '1'),
+(53, '2018-12-14 21:41:11', '<p>iyi sne</p>', 172, 183, '1'),
+(54, '2018-12-14 21:44:08', '<p>sdfdsds</p>', 171, 172, '1'),
+(55, '2018-12-14 21:44:58', '<p>zxcxzcxzcxcxz</p>', 171, 174, '1'),
+(56, '2018-12-14 21:45:13', '<p>aaaaa</p>', 171, 174, '1'),
+(57, '2018-12-14 21:59:24', '<p>asdasdas</p>', 171, 172, '1'),
+(58, '2018-12-14 22:32:25', '<p>jjjjjj</p>', 171, 172, '1'),
+(59, '2018-12-14 22:42:38', '<p>qqq</p>', 171, 172, '1'),
+(60, '2018-12-14 22:44:27', '<p>dddd</p>', 171, 184, '1');
 
 -- --------------------------------------------------------
 
@@ -417,7 +474,14 @@ INSERT INTO `siparis` (`siparis_id`, `siparis_zaman`, `kullanici_id`, `kullanici
 (750050, '2017-12-09 12:44:43', 0, 166, '1'),
 (750051, '2017-12-09 12:45:39', 168, 166, '1'),
 (750052, '2017-12-09 12:53:07', 168, 166, '1'),
-(750053, '2018-12-06 10:19:07', 171, 166, '1');
+(750053, '2018-12-06 10:19:07', 171, 166, '1'),
+(750054, '2018-12-13 15:19:10', 174, 172, '1'),
+(750055, '2018-12-13 21:20:26', 174, 171, '1'),
+(750056, '2018-12-14 21:48:34', 174, 171, '1'),
+(750057, '2018-12-14 21:51:12', 172, 171, '1'),
+(750058, '2018-12-14 21:51:52', 174, 172, '1'),
+(750059, '2018-12-15 13:14:18', 174, 171, '1'),
+(750060, '2018-12-15 13:14:44', 172, 171, '1');
 
 -- --------------------------------------------------------
 
@@ -463,7 +527,14 @@ INSERT INTO `siparis_detay` (`siparisdetay_id`, `siparis_id`, `kullanici_id`, `k
 (70, 750051, 168, 166, 46, 1000.00, 0, '0000-00-00 00:00:00', '', '', '1', '0', '0000-00-00 00:00:00'),
 (71, 750051, 168, 166, 46, 1000.00, 0, '0000-00-00 00:00:00', '', '', '1', '0', '0000-00-00 00:00:00'),
 (72, 750052, 168, 166, 39, 99.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
-(73, 750053, 171, 166, 41, 59.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00');
+(73, 750053, 171, 166, 41, 59.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(74, 750054, 174, 172, 63, 50.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(75, 750055, 174, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(76, 750056, 174, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(77, 750057, 172, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(78, 750058, 174, 172, 63, 50.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(79, 750059, 174, 171, 67, 10.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(80, 750060, 172, 171, 67, 10.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -487,7 +558,8 @@ CREATE TABLE `slider` (
 INSERT INTO `slider` (`slider_id`, `slider_ad`, `slider_resimyol`, `slider_sira`, `slider_link`, `slider_durum`) VALUES
 (2, 'Slider 1', 'dimg/slider/3067331362252582652425762274502674026403slide-1.jpg', 12, '', '1'),
 (4, 'Slider 2', 'dimg/slider/29538315172733129852slide-2.jpg', 2, '', '1'),
-(5, 'Slider 3', 'dimg/slider/23243301742266520059slide-3.jpg', 3, '', '1');
+(5, 'Slider 3', 'dimg/slider/23243301742266520059slide-3.jpg', 3, '', '1'),
+(6, 'g', 'dimg/slider/2297524463256312872019342_en_1.jpg', 1, 'g', '1');
 
 -- --------------------------------------------------------
 
@@ -518,21 +590,14 @@ CREATE TABLE `urun` (
 --
 
 INSERT INTO `urun` (`urun_id`, `kullanici_id`, `kategori_id`, `urun_zaman`, `urunfoto_resimyol`, `urun_ad`, `urun_seourl`, `urun_detay`, `urun_fiyat`, `urun_satis`, `urun_video`, `urun_keyword`, `urun_stok`, `urun_durum`, `urun_onecikar`) VALUES
-(37, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Bootstrap V9 Template İlan Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
-(38, 166, 15, '2017-12-04 17:42:16', 'dimg/urunfoto/5a2588f81f6bd.png', 'Haber Scripti', 'haber-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 59.00, 0, '', '', 0, '1', '1'),
-(39, 166, 16, '2017-12-04 17:42:55', 'dimg/urunfoto/5a25891f39b7a.jpg', 'Emlak Scripti Teması', 'emlak-scripti-temasi', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 99.00, 0, '', '', 0, '1', '1'),
-(40, 166, 16, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'İnşaat Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
-(41, 166, 15, '2017-12-04 17:42:16', 'dimg/urunfoto/5a2588f81f6bd.png', 'Turizm Scripti', 'haber-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 59.00, 0, '', '', 0, '1', '1'),
-(42, 166, 16, '2017-12-04 17:42:55', 'dimg/urunfoto/5a25891f39b7a.jpg', 'Kuaför Scripti', 'emlak-scripti-temasi', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 99.00, 0, '', '', 0, '1', '1'),
-(43, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Nalbur Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '1'),
-(44, 166, 15, '2017-12-04 17:42:16', 'dimg/urunfoto/5a2588f81f6bd.png', 'Firma Scripti', 'haber-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet, lorem non gravida viverra, metus elit laoreet augue, vel ornare felis risus in turpis. Aenean eget urna hendrerit, fringilla dui non, ultricies nisl. Vivamus ut eros id augue elementum tincidunt in et velit. Ut posuere lorem libero, non efficitur orci volutpat vitae. Vestibulum quam ex, interdum id velit eget, condimentum tempus purus. Duis vitae nisi vel eros efficitur commodo et at nulla. Donec hendrerit tortor non mi malesuada pulvinar. Pellentesque id gravida sapien. Nulla vel ex consequat, mattis diam imperdiet, interdum leo. Aliquam rhoncus lorem ipsum, nec viverra libero malesuada sed. Donec suscipit ultrices tellus vel accumsan. Praesent in auctor risus.</p><p>Mauris sodales, erat at porta commodo, velit sem lacinia sem, eget pharetra sapien risus quis velit. Maecenas sit amet venenatis mauris, nec aliquet ante. Suspendisse id leo ac ex venenatis molestie. Suspendisse fringilla nisi in enim auctor, a euismod dolor bibendum. Suspendisse eget arcu non risus ultricies sagittis id efficitur erat. Donec rutrum erat fringilla lorem consequat consectetur. Proin id lorem lorem. Duis quis tellus vitae leo porttitor fermentum. Sed vel tincidunt eros. Fusce varius, felis quis porta maximus, sem mauris pretium neque, eu lobortis nisi metus non dui.</p><p>Sed molestie dolor in diam vehicula, et egestas ligula blandit. Vivamus ultrices volutpat posuere. Proin vulputate diam et sapien ornare cursus. Ut odio nisi, lacinia non dignissim non, posuere et justo. Nulla ac pretium turpis. Ut scelerisque vitae massa a sagittis. Suspendisse potenti. Proin finibus quam odio. Phasellus aliquet, augue vel consequat efficitur, eros magna euismod risus, at porttitor enim justo a est. Praesent ante nulla, sodales nec erat bibendum, egestas sodales libero. Phasellus convallis felis ac lorem ornare, in congue leo dapibus. Nam quis turpis et tellus posuere accumsan. Aliquam volutpat sem et lorem dignissim tristique. Aenean tincidunt tortor eget placerat dapibus. Maecenas quis libero a enim sodales rhoncus.</p><p>Donec ornare magna sit amet iaculis venenatis. Duis dictum erat eu tellus congue pharetra. Etiam interdum dui ligula, id eleifend libero pellentesque a. Nunc suscipit quam et magna malesuada faucibus. Sed malesuada, mi ac aliquet lobortis, ex dolor aliquet nulla, a varius elit neque quis nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis luctus ante.</p><p>Nunc fringilla, eros eget finibus fringilla, sapien sapien imperdiet orci, ut volutpat eros tortor sed ex. Phasellus dignissim elementum sem eget imperdiet. Fusce non fermentum mauris. Maecenas turpis elit, faucibus at finibus non, ultrices ac nulla. Maecenas in orci enim. Nullam vitae neque vel turpis sagittis porta eu ac tellus. Mauris venenatis, velit vel fringilla suscipit, metus massa venenatis neque, vitae dictum eros neque id lectus. Duis mi justo, aliquet in dictum in, bibendum et lorem.</p>', 59.00, 0, '', '', 0, '1', '0'),
-(45, 166, 14, '2017-12-03 13:02:51', 'dimg/urunfoto/5a23f5fb38e1a.png', 'Havayolu Acentesi Scripti', 'bootstrap-v9-template-ilan-scripti', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed neque at nisl varius porta a non lectus. Vestibulum sit amet nunc turpis. In arcu nibh, facilisis sed sagittis sit amet, pretium eget felis. Vestibulum ac odio rhoncus, pulvinar nulla at, sollicitudin ex. Nulla sodales dolor at feugiat vehicula. Vestibulum sit amet convallis ex, vel feugiat ligula. Nam dapibus sagittis neque. Cras suscipit ultrices nulla vel vehicula.</p><p>Vestibulum nisl metus, viverra sed ex quis, vulputate lobortis tortor. Maecenas at turpis non lorem vestibulum faucibus. Vivamus efficitur fermentum justo, quis convallis lorem iaculis in. Proin eleifend diam nec mauris suscipit vulputate. Sed dolor mauris, rutrum ac imperdiet eget, efficitur eget magna. Aenean tristique lobortis enim, in aliquet nisi scelerisque non. Nam sagittis, sapien vel sagittis sollicitudin, dui ante blandit leo, nec porta dolor ex et lectus. Vestibulum varius euismod dolor ut auctor. Quisque posuere magna vel mi egestas tempor. Vivamus mollis velit id auctor interdum. Nam pulvinar eget orci nec viverra. Nunc blandit nunc vitae nisl porta, in lacinia odio volutpat. Donec et odio lorem. Nam facilisis laoreet leo sed cursus. Praesent vel nibh a purus ornare suscipit.</p><p>Phasellus lobortis euismod nisi dignissim congue. Sed pretium sed dui sit amet molestie. Donec dictum massa a feugiat placerat. Morbi id gravida diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sapien sapien, nec sodales ante viverra in. Morbi faucibus felis ac cursus consectetur. Mauris posuere pharetra erat eget aliquet.</p><p>Morbi at nibh quis leo vulputate sagittis non vel tellus. Fusce semper lectus tortor, nec fermentum orci mattis sit amet. Duis quis lectus ullamcorper, imperdiet ligula finibus, sollicitudin dui. Sed arcu tellus, consequat vitae leo ac, viverra molestie nibh. Nunc eu nisi dolor. Fusce non lobortis tortor. Donec ut rutrum sapien. Aliquam eget nisi et sem ultricies pharetra sit amet id purus. Nam varius dapibus luctus. Praesent eget neque at ligula rutrum convallis. Praesent mollis, nulla sit amet feugiat finibus, erat purus sollicitudin nunc, nec scelerisque ante nisi vitae erat. Mauris dui ligula, aliquam eu est sit amet, viverra pulvinar enim.</p><p>Donec in ante est. Duis eget libero rhoncus, accumsan est a, luctus enim. Mauris eu volutpat turpis. Nullam mollis feugiat lorem, non laoreet arcu pulvinar nec. Phasellus nec egestas nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque mattis mauris diam, id aliquam quam ultrices quis. Aliquam erat volutpat. Curabitur mauris quam, consectetur a nulla id, vulputate ultricies lectus. Morbi gravida enim vel velit finibus, id venenatis erat malesuada. Morbi gravida est et tortor venenatis, ac iaculis erat feugiat. Maecenas suscipit purus velit, vitae sollicitudin massa consectetur non.</p>', 259.00, 0, '', '', 0, '1', '0'),
-(46, 166, 17, '2017-12-09 12:43:59', 'dimg/urunfoto/5a2bda8fabbab.png', 'emrahyuksel.com.tr Alan Adı', '', '&lt;p&gt;emrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adıemrahyuksel.com.tr Alan Adı&lt;/p&gt;', 1000.00, 0, '', '', 0, '1', '0'),
-(47, 178, 19, '2018-12-10 20:46:24', 'dimg/urunfoto/5c0ed0a08144d.jpg', 'Fü kazanacağım', '', '&lt;p&gt;eee&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0'),
-(48, 172, 19, '2018-12-10 20:51:02', 'dimg/urunfoto/5c0ed1b6238d4.jpg', 'ss', '', '&lt;p&gt;ss&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '1'),
-(49, 172, 19, '2018-12-10 20:59:16', 'dimg/urunfoto/5c0ed3a48ab0a.jpg', 'kkk', '', '&lt;p&gt;kkkk&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0'),
-(50, 178, 19, '2018-12-10 21:05:38', 'dimg/urunfoto/5c0ed5228a9a9.jpg', 'sss', '', '&lt;p&gt;ssss&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0'),
-(51, 172, 19, '2018-12-11 22:35:20', 'dimg/urunfoto/5c103ba82401d.jpg', 'ss', '', '&lt;p&gt;xzcxcxczz&lt;/p&gt;', 50.00, 0, '', '', 0, '0', '0');
+(57, 0, 14, '2018-12-13 13:59:30', 'dimg/urunfoto/5c1265c25bcd9.jpg', 'gddf', 'f', '&lt;p&gt;f&lt;/p&gt;', 50.00, 0, '', 'f', 10, '1', '1'),
+(58, 0, 16, '2018-12-13 14:06:25', 'dimg/urunfoto/5c126761d0dea.jpg', 'gddd', 'g', '&lt;p&gt;g&lt;/p&gt;', 50.00, 0, '', 'g', 10, '1', '1'),
+(62, 0, 14, '2018-12-13 14:12:13', 'dimg/urunfoto/5c1268bd497c1.jpg', 'xaa', 'x', '&lt;p&gt;xccc&lt;/p&gt;', 50.00, 0, '', 'apple,ios', 10, '1', '1'),
+(63, 172, 19, '2018-12-13 14:54:59', 'dimg/urunfoto/5c1272c39b181.jpg', 's', '', '&lt;p&gt;s&lt;/p&gt;', 50.00, 0, '', '', 0, '1', '1'),
+(64, 174, 16, '2018-12-13 21:16:41', 'dimg/urunfoto/5c12cc3900c9b.jpg', 'kedi', 'kedi', '<p>ev kedisi</p>', 100.00, 0, '', 'kedi', 2, '1', '0'),
+(65, 171, 14, '2018-12-13 21:19:41', 'dimg/urunfoto/5c12cced1460f.jpg', 'maç', 'mac', '&lt;p&gt;ma&amp;ccedil;&amp;nbsp;&lt;/p&gt;', 100.00, 0, '', 's', 10, '1', '0'),
+(66, 171, 19, '2018-12-14 20:58:28', 'dimg/urunfoto/5c141974aabc7.jpg', 'veri yapıları', 'veri-yapilari', '<p>veri yapıları final</p>', 250.00, 0, '', 'veri yapıları', 1, '1', '1'),
+(67, 171, 16, '2018-12-15 13:12:58', 'dimg/urunfoto/5c14fddad3316.jpg', 'bilet', 'bilet', '<p>bilet</p>', 10.00, 0, '', 'g', 1, '1', '0');
 
 -- --------------------------------------------------------
 
@@ -605,6 +670,12 @@ ALTER TABLE `ayar`
 --
 ALTER TABLE `banka`
   ADD PRIMARY KEY (`banka_id`);
+
+--
+-- Tablo için indeksler `basarisozleri`
+--
+ALTER TABLE `basarisozleri`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Tablo için indeksler `begen`
@@ -719,22 +790,28 @@ ALTER TABLE `banka`
   MODIFY `banka_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `basarisozleri`
+--
+ALTER TABLE `basarisozleri`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `begen`
 --
 ALTER TABLE `begen`
-  MODIFY `begenmeid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `begenmeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `durum`
 --
 ALTER TABLE `durum`
-  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `hedef`
 --
 ALTER TABLE `hedef`
-  MODIFY `hedef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `hedef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `hedef_detay`
@@ -752,7 +829,7 @@ ALTER TABLE `kategori`
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `menu`
@@ -764,7 +841,7 @@ ALTER TABLE `menu`
 -- Tablo için AUTO_INCREMENT değeri `mesaj`
 --
 ALTER TABLE `mesaj`
-  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `sepet`
@@ -776,25 +853,25 @@ ALTER TABLE `sepet`
 -- Tablo için AUTO_INCREMENT değeri `siparis`
 --
 ALTER TABLE `siparis`
-  MODIFY `siparis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=750054;
+  MODIFY `siparis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=750061;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `siparis_detay`
 --
 ALTER TABLE `siparis_detay`
-  MODIFY `siparisdetay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `siparisdetay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `urun`
 --
 ALTER TABLE `urun`
-  MODIFY `urun_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `urun_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `yorumdurum`
