@@ -118,6 +118,7 @@ if (isset($_GET['kullanici_id'])) {
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="timeline.html" class="active">Anasayfa</a></li>
+                  <li><a href="hedeflerim.php" >Benim Hedeflerim</a></li>
                   <li><a href="timeline-about.html">Hakkıımda</a></li>
                   <li><a href="timeline-album.html">Sepetim</a></li>
                 </ul>
