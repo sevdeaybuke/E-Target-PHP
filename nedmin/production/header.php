@@ -172,7 +172,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
              </li>
 
              <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkımızda </a></li>
-             <li><a href="basarisozler.php"><i class="fa fa-info"></i> Başarı Sözleri </a></li>
+             <li><a href="basarisozleri-ekle.php"><i class="fa fa-info"></i> Başarı Sözleri </a></li>
              <li><a href="gelen-mesajlar.php"><i class="fa fa-envelope"></i>Gelen Mesajlar</a></li>
              <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </a></li>
              <li><a href="urun.php"><i class="fa fa-shopping-basket"></i> Ürünler </a></li>
