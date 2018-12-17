@@ -1614,5 +1614,29 @@ if($_POST['durum_begen']) {
 	}
 }
 
+#Başarı Sözleri Kaydetme İşlemleri
+
+
+if (isset($_POST['basariekle'])) {
+
+	$kaydet=$db->prepare("INSERT INTO basarisozleri SET
+		kullanici_id=:kullanici_id,
+		basari_sozleri=:basari_sozleri
+		");
+	$insert=$kaydet->execute(array(
+		'kullanici_id' => 171,
+		'basari_sozleri' => $_POST['basari_sozleri']
+	));
+	if ($insert) {
+
+		Header("Location:../production/basarisozler.php?durum=ok");
+
+	} else {
+
+		Header("Location:../production/basarisozler.php?durum=no");
+	}
+
+}
+
 
 ?>
