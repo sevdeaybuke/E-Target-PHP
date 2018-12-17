@@ -117,10 +117,10 @@ if (isset($_GET['kullanici_id'])) {
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="newsfeed.php" class="active">Anasayfa</a></li>
-                  <li><a href="hedeflerim.php">Benim Hedeflerim</a></li>
+                  <li><a href="newsfeed.php">Anasayfa</a></li>
+                  <li><a href="hedeflerim.php" >Benim Hedeflerim</a></li>
                   <li><a href="timeline-about.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Hakkıımda</a></li>
-                  <li><a href="timelinebasari.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Başarı Sözleri</a></li>
+                  <li><a href="timelinebasari.php"  class="active">Başarı Sözleri</a></li>
                 </ul>
               </div>
             </div>
@@ -142,32 +142,17 @@ if (isset($_GET['kullanici_id'])) {
 
               <!-- Post content içerisine db deki tüm hedefler çekilecek -->    
               <?php
-                $hedefsor=$db->prepare("SELECT *,kullanici_ad as kullanici_ad,kullanici_magazafoto as kullanici_magazafoto FROM hedef  as h INNER JOIN kullanici as k
-                on h.kullanici_id=k.kullanici_id order by hedef_zaman DESC");
+                $hedefsor=$db->prepare("SELECT * FROM basarisozleri");
                 $hedefsor->execute();
                 $say=0;
 
                 while($hedefcek=$hedefsor->fetch(PDO::FETCH_ASSOC)) { $say++?>
-                <div class="post-content">
-                    <!--Post Date-->
-                    <div class="post-date hidden-xs hidden-sm">
-                    <h5><?php echo $hedefcek['kullanici_ad']; ?><!--Kullanıcı adları çekilecek--></h5>
-                    <p class="text-grey"><?php echo $hedefcek['hedef_zaman']; ?></p>
-                    </div><!--Post Date End-->
-                    
-                <img src="<?php echo $hedefcek['urunfoto_resimyol']; ?>" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="<?php echo $hedefcek['kullanici_magazafoto']; ?>" alt="user" class="profile-photo-md pull-left" />
-                  <div style="margin-left:80px;"><p><b><u>Hedef:</u> <?php echo $hedefcek['hedef_ad']; ?></p></div>
+
+                <div class="post-container">          
+                  <div style="margin-left:80px;"><p><b><u>Günün Sözleri:</u> <?php echo $hedefcek['basari_sozleri']; ?></p></div>
                   <div class="post-detail">
                     
-                    <div class="post-comment">
-                      <!--<img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-                      <input type="text" class="form-control" placeholder="Yorum Gönder">
-                      &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="float:right;height:38px;">Gönder</button>
-                    </div>
                   </div>
-                </div>
                 </div>
                 <?php } ?>
               <!-- Post Content

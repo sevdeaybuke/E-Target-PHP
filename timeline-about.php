@@ -114,10 +114,10 @@ if (isset($_GET['kullanici_id'])) {
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html" class="active">Anasayfa</a></li>
+                  <li><a href="newsfeed.php">Anasayfa</a></li>
                   <li><a href="hedeflerim.php" >Benim Hedeflerim</a></li>
-                  <li><a href="timeline-about.php">Hakkıımda</a></li>
-                  <li><a href="timeline-album.html">Sepetim</a></li>
+                  <li><a href="timeline-about.php" class="active">Hakkımda</a></li>
+                  <li><a href="timelinebasari.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Başarı Sözleri</a></li>
                 </ul>
               </div>
             </div>
