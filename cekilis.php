@@ -114,9 +114,16 @@ if (isset($_GET['kullanici_id'])) {
                   $coincek=$coinsor->fetch(PDO::FETCH_ASSOC);
                   ?>
                   <p class="text-muted"><b><?php echo ($coincek['hedef_fiyat']==0) ? '0': $coincek['hedef_fiyat']; ?></b>&nbsp;<i class="fa fa-bitcoin"></i></p>
-                </div>
+                </div>   
               </div>
-
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="newsfeed.php" class="active">Anasayfa</a></li>
+                  <li><a href="hedeflerim.php">Benim Hedeflerim</a></li>
+                  <li><a href="timeline-about.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Hakkıımda</a></li>
+                  <li><a href="timelinebasari.php?kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">Başarı Sözleri</a></li>
+                </ul>
+              </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
 
@@ -125,25 +132,129 @@ if (isset($_GET['kullanici_id'])) {
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-7">
-
-              <!-- Post Create Box
-              ================================================= -->
+              <ul class="album-photos">
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-1">
+                    <img src="images/cekilis.png" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/1.jpg" alt="photo" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-2">
+                    <img src="images/album/2.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-2" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/2.jpg" alt="photo" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-3">
+                    <img src="images/album/3.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-3" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/3.jpg" alt="photo" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-4">
+                    <img src="images/album/4.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-4" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/4.jpg" alt="photo" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-5">
+                    <img src="images/album/5.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-5" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/5.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-6">
+                    <img src="images/album/6.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-6" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/6.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-7">
+                    <img src="images/album/7.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-7" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/7.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-8">
+                    <img src="images/album/8.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-8" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/8.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-wrapper" data-toggle="modal" data-target=".photo-9">
+                    <img src="images/album/9.jpg" alt="photo" />
+                  </div>
+                  <div class="modal fade photo-9" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <img src="images/album/9.jpg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
               <div class="create-post">
                 <div class="row">
-
                 </div>
               </div><!-- Post Create Box End-->
-
-              <!-- Post content içerisine Çekilişe katıl kısmı gelecek -->    
-              
-     
-                <div class="post-container">   
-                  <img src="images/cekilis.png" />   
-                  <br>     <br>   <br>   <br>    
-                  <div style="margin-left:80px;">
+              <!-- Post content içerisine Çekilişe katıl kısmı gelecek -->                       
+                <div class="post-container">     
+                  <div>
                   <form action="nedmin/netting/islem.php?kullanici_id=<?php echo $_GET['kullanici_id']; ?>" method="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                  
                   <button type="submit" class="btn btn-primary btn-xs" style="float:left;" name="cekilisekatil">ÇEKİLİŞE KATIL</button>
+                  <?php if(!empty($_GET['mesaj']) && $_GET['mesaj']=='exist') { ?>
+                  <h3><p>Çekilişe birden çok defa katılamazsınız.</p></h3>
+                  <?php } ?>
                  </form>
                   </div>
                   <div class="post-detail">
