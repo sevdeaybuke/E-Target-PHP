@@ -3,7 +3,8 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$urunsor=$db->prepare("SELECT * FROM cekilis order by zaman DESC");
+$urunsor=$db->prepare("SELECT *,kullanici_ad as kullanici_ad,kullanici_soyad as kullanici_soyad FROM cekilis
+inner join kullanici on kullanici.kullanici_id=cekilis.kullanici_id order by zaman DESC");
 $urunsor->execute();
 
 
@@ -50,6 +51,10 @@ $urunsor->execute();
                 <tr>
                   <th>Çekilişe Katılanlar</th>
                 </tr>
+                <tr>
+                <th>Sıra</th>
+                <th>Kullanıcı ID</th>
+                </tr>
               </thead>
 
               <tbody>
@@ -63,7 +68,7 @@ $urunsor->execute();
 
                 <tr>
                  <td width="20"><?php echo $say ?></td>
-                 <td><?php echo $uruncek['kullanici_id'] ?></td>
+                 <td><?php echo $uruncek['kullanici_ad']." ".$uruncek['kullanici_soyad']; ?></td>
 
           </tr>
 
