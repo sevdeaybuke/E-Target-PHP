@@ -188,7 +188,12 @@ if (isset($_SESSION['userkullanici_mail'])) {
              <li><a href="slider.php"><i class="fa fa-image"></i> Slider </a></li>
              <li><a href="yorum.php"><i class="fa fa-comments"></i> Yorumlar </a></li>      
              <li><a href="banka.php"><i class="fa fa-bank"></i> Bankalar </a></li>
-             <li><a href="cekilisyap.php"><i class="fa fa-archive"></i> Çekiliş Yap </a></li>
+             <li><a><i class="fa fa-archive"></i> Çekiliş <span class="fa fa-archive"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="cekilis-kazanan.php">Çekilişi Kazananlar</a></li>                
+               </ul>
+             </li>
+
 
 
 
