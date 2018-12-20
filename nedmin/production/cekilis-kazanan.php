@@ -81,6 +81,7 @@ $urunsor->execute();
 
         </tbody>
       </table>
+      <button type="submit" name="kazanan" class="btn btn-success">Kazanan Seç</button>
 
       <!-- Div İçerik Bitişi -->
 
