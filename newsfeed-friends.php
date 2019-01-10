@@ -149,7 +149,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
                     <img src="<?php echo $kullaniclariCek['kullanici_magazafoto'] ?>" alt="user" class="profile-photo-lg"/>
                     <div class="friend-info">
                     <a href="timeline.html" class="profile-link"><?php echo $kullaniclariCek['kullanici_ad']." ".($kullaniclariCek['kullanici_soyad']) ?></a></h5>
-                    <a href="#" class="pull-right text-green">| Profilini Görüntüle</a>
+                    <a href="timeline.php" class="pull-right text-green">| Profilini Görüntüle</a>
                     <?php 
                       if (empty($_SESSION['userkullanici_id'])) {?>
 

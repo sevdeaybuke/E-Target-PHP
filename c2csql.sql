@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 18 Ara 2018, 22:17:39
--- Sunucu sürümü: 10.1.36-MariaDB
--- PHP Sürümü: 7.2.10
+-- Üretim Zamanı: 10 Oca 2019, 19:28:50
+-- Sunucu sürümü: 10.1.16-MariaDB
+-- PHP Sürümü: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -101,6 +99,14 @@ CREATE TABLE `basarisozleri` (
   `basari_sozleri` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Tablo döküm verisi `basarisozleri`
+--
+
+INSERT INTO `basarisozleri` (`id`, `kullanici_id`, `basari_sozleri`) VALUES
+(2, 171, '&lt;p&gt;Basari her zaman kovala....&lt;/p&gt;'),
+(3, 171, 'Hedefine odaklan...');
+
 -- --------------------------------------------------------
 
 --
@@ -138,7 +144,9 @@ INSERT INTO `begen` (`begenmeid`, `begenenkul_id`, `durum_id`) VALUES
 (18, 172, 12),
 (19, 183, 20),
 (20, 172, 19),
-(21, 174, 15);
+(21, 174, 15),
+(22, 172, 22),
+(23, 172, 23);
 
 -- --------------------------------------------------------
 
@@ -200,7 +208,8 @@ INSERT INTO `durum` (`durum_id`, `kullanici_id`, `durum`, `zaman`, `resim`) VALU
 (19, 172, 'ksjdhfkjshd hksdjh fkdshjkdsh sdhkjdsh ', '2018-12-11 16:23:19', ''),
 (20, 183, 'deneme', '2018-12-12 18:59:03', ''),
 (21, 172, 'gfdfd', '2018-12-15 01:41:41', ''),
-(22, 172, 'll', '2018-12-19 00:17:22', '');
+(22, 172, 'll', '2018-12-19 00:17:22', ''),
+(23, 172, 'merhaba', '2018-12-22 16:24:59', '');
 
 -- --------------------------------------------------------
 
@@ -222,7 +231,7 @@ CREATE TABLE `hakkimizda` (
 --
 
 INSERT INTO `hakkimizda` (`hakkimizda_id`, `hakkimizda_baslik`, `hakkimizda_icerik`, `hakkimizda_video`, `hakkimizda_vizyon`, `hakkimizda_misyon`) VALUES
-(0, 'E-TARGET SOSYAL MEDYA', '<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Phasellus viverra viverra eros, <img alt=\"\" src=\"http://eticaret.neyazilim.com/dimg/28481Udemy_logo.png\" style=\"float:right; height:60px; width:200px\" />eu laoreet leo iaculis vehicula. Nunc pretium volutpat neque, finibus fermentum neque pretium vel. In hac habitasse platea dictumst. Phasellus ipsum lacus, vehicula et fringilla a, dapibus ac mi. Nulla orci tortor, fringilla eget magna in, dictum consequat lectus. Sed tincidunt purus nec erat scelerisque pretium. Aliquam vehicula lacus vel lacus varius egestas.</p>\r\n\r\n<p>Vivamus eget euismod mi. Pellentesque et bibendum libero. Aliquam ullamcorper felis id nisl fermentum fringilla. Curabitur egestas condimentum lacus ut ornare. Donec vitae libero sagittis, pharetra massa ut, aliquam tellus. Proin luctus ex orci, nec pretium purus ultrices id. Nulla facilisi. Donec convallis pellentesque mauris. Suspendisse potenti. Ut viverra ex ante, vel tincidunt massa pellentesque et. Aenean rutrum ut ex facilisis vestibulum. Mauris est nibh, auctor quis efficitur et, pellentesque eu metus.</p>\r\n\r\n<p>Sed auctor maximus nunc ut cursus. Sed ultrices lectus eu turpis tincidunt, id dignissim nisl mattis. Sed in risus justo. Fusce et eleifend elit. Donec sit amet sapien accumsan, ornare diam ut, pellentesque dui. Maecenas ut molestie mauris. Curabitur imperdiet enim ut feugiat vulputate. Quisque dictum dolor a risus facilisis, eu bibendum dolor aliquam. Mauris vestibulum leo mauris, sit amet blandit erat suscipit nec.</p>\r\n\r\n<p>Nam facilisis sem vitae sem cursus, non ultrices dolor ullamcorper. Donec tortor massa, convallis eu tortor ornare, ornare sollicitudin tellus. Pellentesque quis interdum neque. Praesent elementum mauris sit amet nibh scelerisque bibendum. Maecenas aliquet metus lacinia elit bibendum volutpat. Vivamus eget augue eu quam consectetur venenatis. Proin rhoncus, tellus vitae tempor efficitur, eros orci maximus odio, eu rutrum sapien arcu non nisl. Donec egestas mauris eu nisl faucibus, ullamcorper dictum urna efficitur. Aliquam eu velit nisi. Etiam vitae nisi massa. Etiam a auctor felis.</p>\r\n\r\n<p>Vestibulum sem erat, venenatis at blandit in, mollis ut mauris. Donec vitae neque venenatis ante fermentum auctor vel at quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ut auctor lectus, at egestas odio. Donec vestibulum nunc vitae porttitor scelerisque. Aenean non erat facilisis, finibus ex eu, commodo nulla. Pellentesque ornare, sem sit amet laoreet efficitur, sapien enim facilisis nibh, vel imperdiet nunc eros id libero. Suspendisse potenti. Nullam nec fringilla nibh. Duis sed ex a eros interdum faucibus. Duis viverra quis sem ut accumsan.</p>\r\n', 'gGXSHaER4h8', 'E-TARGET', 'E-TARGET');
+(0, 'E-TARGET SOSYAL MEDYA', '<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Phasellus viverra viverra eros, <img alt="" src="http://eticaret.neyazilim.com/dimg/28481Udemy_logo.png" style="float:right; height:60px; width:200px" />eu laoreet leo iaculis vehicula. Nunc pretium volutpat neque, finibus fermentum neque pretium vel. In hac habitasse platea dictumst. Phasellus ipsum lacus, vehicula et fringilla a, dapibus ac mi. Nulla orci tortor, fringilla eget magna in, dictum consequat lectus. Sed tincidunt purus nec erat scelerisque pretium. Aliquam vehicula lacus vel lacus varius egestas.</p>\r\n\r\n<p>Vivamus eget euismod mi. Pellentesque et bibendum libero. Aliquam ullamcorper felis id nisl fermentum fringilla. Curabitur egestas condimentum lacus ut ornare. Donec vitae libero sagittis, pharetra massa ut, aliquam tellus. Proin luctus ex orci, nec pretium purus ultrices id. Nulla facilisi. Donec convallis pellentesque mauris. Suspendisse potenti. Ut viverra ex ante, vel tincidunt massa pellentesque et. Aenean rutrum ut ex facilisis vestibulum. Mauris est nibh, auctor quis efficitur et, pellentesque eu metus.</p>\r\n\r\n<p>Sed auctor maximus nunc ut cursus. Sed ultrices lectus eu turpis tincidunt, id dignissim nisl mattis. Sed in risus justo. Fusce et eleifend elit. Donec sit amet sapien accumsan, ornare diam ut, pellentesque dui. Maecenas ut molestie mauris. Curabitur imperdiet enim ut feugiat vulputate. Quisque dictum dolor a risus facilisis, eu bibendum dolor aliquam. Mauris vestibulum leo mauris, sit amet blandit erat suscipit nec.</p>\r\n\r\n<p>Nam facilisis sem vitae sem cursus, non ultrices dolor ullamcorper. Donec tortor massa, convallis eu tortor ornare, ornare sollicitudin tellus. Pellentesque quis interdum neque. Praesent elementum mauris sit amet nibh scelerisque bibendum. Maecenas aliquet metus lacinia elit bibendum volutpat. Vivamus eget augue eu quam consectetur venenatis. Proin rhoncus, tellus vitae tempor efficitur, eros orci maximus odio, eu rutrum sapien arcu non nisl. Donec egestas mauris eu nisl faucibus, ullamcorper dictum urna efficitur. Aliquam eu velit nisi. Etiam vitae nisi massa. Etiam a auctor felis.</p>\r\n\r\n<p>Vestibulum sem erat, venenatis at blandit in, mollis ut mauris. Donec vitae neque venenatis ante fermentum auctor vel at quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ut auctor lectus, at egestas odio. Donec vestibulum nunc vitae porttitor scelerisque. Aenean non erat facilisis, finibus ex eu, commodo nulla. Pellentesque ornare, sem sit amet laoreet efficitur, sapien enim facilisis nibh, vel imperdiet nunc eros id libero. Suspendisse potenti. Nullam nec fringilla nibh. Duis sed ex a eros interdum faucibus. Duis viverra quis sem ut accumsan.</p>\r\n', 'gGXSHaER4h8', 'E-TARGET', 'E-TARGET');
 
 -- --------------------------------------------------------
 
@@ -349,12 +358,11 @@ CREATE TABLE `kullanici` (
 
 INSERT INTO `kullanici` (`kullanici_id`, `subMerchantKey`, `kullanici_magaza`, `kullanici_magazafoto`, `kullanici_zaman`, `kullanici_sonzaman`, `kullanici_resim`, `kullanici_tc`, `kullanici_banka`, `kullanici_iban`, `kullanici_ad`, `kullanici_soyad`, `kullanici_mail`, `kullanici_gsm`, `kullanici_password`, `kullanici_adres`, `kullanici_il`, `kullanici_ilce`, `kullanici_unvan`, `kullanici_tip`, `kullanici_vdaire`, `kullanici_vno`, `kullanici_yetki`, `kullanici_durum`) VALUES
 (153, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-07-31 11:31:57', '0000-00-00 00:00:00', '', '', '', NULL, 'Emrah', 'Yüksel', 'info@emrahyuksel.com.tr', '', '123456', 's1', 'İstanbul', 'Çatalca', 'sdf', 'PERSONAL', 'sdf', 'sdf', '5', 1),
-(166, '', '0', 'dimg/test/5a2b97af021ac.jpg', '2017-12-08 21:51:51', '2017-12-09 23:03:57', '', '12345678910', 'Garantia', 'TR121312', 'Emrah', 'Yüksel', 'satici@emrahyuksel.com.tr', '08508408076', '123456', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (168, '', '0', 'dimg/test/5a2988bb8a36d.jpg', '2017-12-02 16:18:40', '2017-12-10 12:26:32', '', '12345678910', 'Garantia', 'TR121312', 'Naci', 'Yüksel', 'alici@emrahyuksel.com.tr', '08508408076', 'dc483e80a7a0bd9ef71d8cf973673924', 'Topkapı Sarayı 1.Avlu Çıkmazı', 'İstanbul', 'Çatalca', '', 'PERSONAL', '', '', '1', 1),
 (169, '', '0', 'dimg/test/5a2bbf7b7a385.jpg', '2017-12-09 12:45:24', '0000-00-00 00:00:00', '', '', '', NULL, 'Ahmet', 'Korkmaz', 'alici1@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (170, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2017-12-09 15:51:51', '0000-00-00 00:00:00', '', '', '', NULL, 'Murat', 'Sönmez', 'alici2@emrahyuksel.com.tr', '', 'dc483e80a7a0bd9ef71d8cf973673924', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (171, '', '2', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-06 13:16:28', '0000-00-00 00:00:00', '', '', '', NULL, 'Sevde Aybüke', 'Kaleli', 'sevdeaybuke@gmail.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '5', 1),
-(172, '', '1', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2018-12-17 03:44:09', '', '765476', 'uytuyyu', '7657656467', 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', 'dfgsfs', 'asfdsa', 'asdsa', '', 'PERSONAL', '', '', '1', 1),
+(172, '', '1', 'dimg/test/5c0aeda73ce4f.jpg', '2018-12-07 23:51:45', '2019-01-08 10:22:26', '', '765476', 'uytuyyu', '7657656467', 'cansu', 'bilgin', 'cansu@cansu.com', '565456454', 'e10adc3949ba59abbe56e057f20f883e', 'dfgsfs', 'asfdsa', 'asdsa', '', 'PERSONAL', '', '', '1', 1),
 (173, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 01:09:22', '0000-00-00 00:00:00', '', '', '', NULL, 'deneme', 'deneme', 'd', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (174, '', '0', 'dimg/test/5c0b6fc445c0b.jpg', '2018-12-08 10:15:49', '2018-12-14 02:19:47', '', '', '', NULL, 'okan', 'karahan', 'okan@a.com', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', 'PERSONAL', '', '', '1', 1),
 (175, '', '2', 'dimg/test/5c0d778c1ce13.png', '2018-12-09 23:09:52', '2018-12-10 00:28:37', '', '21231321321', 'ds', '131241242', 'deneme', 'deneme', 'deneme', '454545', 'e10adc3949ba59abbe56e057f20f883e', 'a', 'a', 'asdas', '', 'PERSONAL', '', '', '1', 1),
@@ -443,7 +451,8 @@ INSERT INTO `mesaj` (`mesaj_id`, `mesaj_zaman`, `mesaj_detay`, `kullanici_gel`, 
 (57, '2018-12-14 21:59:24', '<p>asdasdas</p>', 171, 172, '1'),
 (58, '2018-12-14 22:32:25', '<p>jjjjjj</p>', 171, 172, '1'),
 (59, '2018-12-14 22:42:38', '<p>qqq</p>', 171, 172, '1'),
-(60, '2018-12-14 22:44:27', '<p>dddd</p>', 171, 184, '1');
+(60, '2018-12-14 22:44:27', '<p>dddd</p>', 171, 184, '1'),
+(61, '2018-12-19 14:52:15', '<p>kjjj</p>', 168, 172, '0');
 
 -- --------------------------------------------------------
 
@@ -502,7 +511,9 @@ INSERT INTO `siparis` (`siparis_id`, `siparis_zaman`, `kullanici_id`, `kullanici
 (750057, '2018-12-14 21:51:12', 172, 171, '1'),
 (750058, '2018-12-14 21:51:52', 174, 172, '1'),
 (750059, '2018-12-15 13:14:18', 174, 171, '1'),
-(750060, '2018-12-15 13:14:44', 172, 171, '1');
+(750060, '2018-12-15 13:14:44', 172, 171, '1'),
+(750061, '2018-12-19 14:51:54', 172, 171, '1'),
+(750062, '2018-12-22 13:27:12', 172, 171, '1');
 
 -- --------------------------------------------------------
 
@@ -555,7 +566,9 @@ INSERT INTO `siparis_detay` (`siparisdetay_id`, `siparis_id`, `kullanici_id`, `k
 (77, 750057, 172, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
 (78, 750058, 174, 172, 63, 50.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
 (79, 750059, 174, 171, 67, 10.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
-(80, 750060, 172, 171, 67, 10.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00');
+(80, 750060, 172, 171, 67, 10.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(81, 750061, 172, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00'),
+(82, 750062, 172, 171, 65, 100.00, 0, '0000-00-00 00:00:00', '', '', '0', '0', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -669,8 +682,8 @@ CREATE TABLE `yorumlar` (
 --
 
 INSERT INTO `yorumlar` (`yorum_id`, `kullanici_id`, `urun_id`, `yorum_detay`, `yorum_puan`, `yorum_zaman`, `yorum_onay`) VALUES
-(18, 168, 37, 'Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500\'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.', 5, '2017-12-07 18:20:28', '0'),
-(19, 168, 37, 'Herşey güzel kaptanla birlikte php kodluyoruz yeni şeyler öğreniyoruz. Bu eğitimden sonra Bootstrap 4\'e geçerek tasarım bilgimizide arttırmayı hedefliyorum. Kaptana Selam Yola Devam...', 4, '2017-12-07 18:38:50', '0'),
+(18, 168, 37, 'Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500''lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.', 5, '2017-12-07 18:20:28', '0'),
+(19, 168, 37, 'Herşey güzel kaptanla birlikte php kodluyoruz yeni şeyler öğreniyoruz. Bu eğitimden sonra Bootstrap 4''e geçerek tasarım bilgimizide arttırmayı hedefliyorum. Kaptana Selam Yola Devam...', 4, '2017-12-07 18:38:50', '0'),
 (20, 168, 44, 'süper', 5, '2017-12-09 11:52:32', '0'),
 (21, 168, 44, 'süper', 5, '2017-12-09 11:52:39', '0'),
 (22, 168, 41, 'süper', 5, '2017-12-09 11:52:46', '0'),
@@ -815,116 +828,96 @@ ALTER TABLE `yorumlar`
 --
 ALTER TABLE `banka`
   MODIFY `banka_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `basarisozleri`
 --
 ALTER TABLE `basarisozleri`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Tablo için AUTO_INCREMENT değeri `begen`
 --
 ALTER TABLE `begen`
-  MODIFY `begenmeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
+  MODIFY `begenmeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Tablo için AUTO_INCREMENT değeri `cekilis`
 --
 ALTER TABLE `cekilis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `durum`
 --
 ALTER TABLE `durum`
-  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
+  MODIFY `durum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Tablo için AUTO_INCREMENT değeri `hedef`
 --
 ALTER TABLE `hedef`
   MODIFY `hedef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `hedef_detay`
 --
 ALTER TABLE `hedef_detay`
   MODIFY `hedefdetay_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
   MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `mesaj`
 --
 ALTER TABLE `mesaj`
-  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
+  MODIFY `mesaj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- Tablo için AUTO_INCREMENT değeri `sepet`
 --
 ALTER TABLE `sepet`
   MODIFY `sepet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `siparis`
 --
 ALTER TABLE `siparis`
-  MODIFY `siparis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=750061;
-
+  MODIFY `siparis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=750063;
 --
 -- Tablo için AUTO_INCREMENT değeri `siparis_detay`
 --
 ALTER TABLE `siparis_detay`
-  MODIFY `siparisdetay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
-
+  MODIFY `siparisdetay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- Tablo için AUTO_INCREMENT değeri `slider`
 --
 ALTER TABLE `slider`
   MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `urun`
 --
 ALTER TABLE `urun`
   MODIFY `urun_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `yorumdurum`
 --
 ALTER TABLE `yorumdurum`
   MODIFY `yorumdurumid` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `yorumhedef`
 --
 ALTER TABLE `yorumhedef`
   MODIFY `yorumhedef_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- Tablo için AUTO_INCREMENT değeri `yorumlar`
 --
 ALTER TABLE `yorumlar`
   MODIFY `yorum_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
